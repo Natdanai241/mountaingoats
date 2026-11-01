@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0518">
+<title>แพะภูเขา — Mountain Goats</title>
+<style>
+:root{--f:"Noto Sans Thai","IBM Plex Sans Thai","Sarabun","Leelawadee UI","Leelawadee","Thonburi","Tahoma",system-ui,-apple-system,"Segoe UI",sans-serif;
+--ink:#152230;--mut:#5b6976;--pap:#fbf8f2;--pap2:#efe6d6;--ln:rgba(21,34,48,.13);--foc:#2f7cf6;
+--m5:#4f9a3f;--m6:#1f8a7a;--m7:#2f6fb0;--m8:#6a52b8;--m9:#b8457a;--m10:#c9741a;--g0:#f06a35;--g1:#2f7cf6;--g2:#2f9a5c;--g3:#9a5bdc;
+--glass:rgba(252,249,243,.95);--sh:0 18px 40px rgba(4,10,22,.38),0 3px 8px rgba(4,10,22,.2);--r:20px;
+--die:clamp(44px,6.2vh,58px);--gs:clamp(14px,min(3.1vh,3.3vw),30px)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{font-family:var(--f);color:var(--ink);line-height:1.45;-webkit-tap-highlight-color:transparent;background:linear-gradient(180deg,#0d1830 0%,#23396a 28%,#7a5b8c 52%,#e08a68 74%,#f6c98f 90%,#f9dcaa 100%)}
+body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--foc);outline-offset:2px}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}.bg svg{position:absolute;left:0;bottom:0;width:100%;height:72%}
+#app{position:relative;z-index:1;height:100vh;height:100dvh;max-width:1480px;margin:0 auto;display:flex;flex-direction:column;
+padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.ic{width:20px;height:20px;flex:none}
+.goat{display:block;overflow:visible}
+.btn{appearance:none;-webkit-appearance:none;border:0;border-radius:12px;padding:.5em 1em;min-height:42px;font-weight:700;cursor:pointer;background:#fff;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:6px;line-height:1.2;
+box-shadow:0 2px 0 rgba(0,0,0,.12),inset 0 0 0 1px var(--ln);transition:transform .12s,filter .15s,opacity .15s;touch-action:manipulation}
+.btn:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.05)}.btn:not(:disabled):active{transform:translateY(1px)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.pri{background:linear-gradient(180deg,#ff8f57,#e2541f);color:#fff;box-shadow:0 4px 0 #a83c14,0 8px 18px rgba(226,84,31,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.grn{background:linear-gradient(180deg,#43a06f,#26603f);color:#fff;box-shadow:0 4px 0 #18402a,inset 0 1px 0 rgba(255,255,255,.3)}
+.soft{background:var(--pap2)}.ghost{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.42)}
+.dng{background:#fff;color:#b3352d;box-shadow:inset 0 0 0 2px #d0463d}
+.sm{min-height:34px;padding:.3em .75em;font-size:.86rem;border-radius:10px}.wide{width:100%}.big{font-size:1.12rem;min-height:50px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.c{justify-content:center}
+.mut{color:var(--mut);font-size:.9em}.err{color:#b3352d;font-weight:600;margin:.3em 0}
+.ib{width:38px;height:38px;flex:none;border-radius:11px;border:0;cursor:pointer;display:inline-grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.26)}
+.ib:hover{background:rgba(255,255,255,.24)}
+/* menu */
+.menu{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;gap:clamp(4px,1.3vh,14px)}
+.hero-art{height:clamp(70px,22vh,210px);width:auto;max-width:92vw;filter:drop-shadow(0 14px 24px rgba(0,0,0,.4))}
+.title{font-size:clamp(42px,min(12vw,10vh),104px);font-weight:900;line-height:1.2;margin:0;padding-top:.06em;background:linear-gradient(180deg,#fffaf0,#ffd890 55%,#f2894a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 rgba(70,28,10,.45)) drop-shadow(0 12px 20px rgba(0,0,0,.3))}
+.sub{letter-spacing:.5em;font-weight:800;margin:0;opacity:.9;font-size:clamp(11px,1.6vh,15px)}
+.tag{margin:0;max-width:560px;font-size:clamp(.9rem,2vh,1.08rem);opacity:.95}
+.play{font-size:clamp(1.1rem,2.6vh,1.35rem);padding:.6em 2.4em;border-radius:999px}
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(940px,100%);margin-top:4px}
+.mode{display:flex;align-items:center;gap:12px;text-align:left;border:0;cursor:pointer;background:var(--glass);color:var(--ink);border-radius:16px;padding:12px 14px;box-shadow:var(--sh);transition:transform .15s}
+.mode:hover{transform:translateY(-3px)}.mode b{display:block;font-size:1rem}.mode small{color:var(--mut);font-size:.82rem}
+.mi{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;background:var(--c);flex:none;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}.mi .ic{width:24px;height:24px}
+.stats{margin:0;font-size:.85rem;opacity:.9}
+@media (max-width:720px){.modes{grid-template-columns:1fr;gap:7px}.mode{padding:8px 12px}.mi{width:38px;height:38px}}
+@media (max-height:700px){.hero-art{display:none}}@media (max-height:560px){.tag,.stats,.sub{display:none}}
+/* setup */
+.setup{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;width:min(660px,100%);margin:0 auto}
+.head{display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:10px}.head h1{margin:0;font-size:1.4rem}
+.card{min-height:0;overflow:auto;background:var(--glass);border-radius:var(--r);box-shadow:var(--sh);padding:16px}
+.fld{display:block;margin:0 0 12px}.fld>span{display:block;font-weight:700;margin-bottom:5px;font-size:.92rem}
+.inp,.code{width:100%;min-height:42px;border-radius:12px;border:2px solid var(--ln);background:#fff;padding:.45em .8em}
+.inp:focus,.code:focus{border-color:var(--foc);outline:none}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;word-break:break-all;resize:vertical}
+.chip{border:2px solid var(--ln);background:#fff;border-radius:999px;min-height:38px;padding:4px 13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip.on{background:#1f4a35;color:#fff;border-color:#1f4a35}
+.sw{width:15px;height:15px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 2px rgba(0,0,0,.2);flex:none}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:7px}.names .row{flex-wrap:nowrap}
+@media (max-width:520px){.names{grid-template-columns:1fr}}
+.tog{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;background:none;padding:9px 0;border-bottom:1px solid var(--ln);cursor:pointer;text-align:left}
+.tog i{width:46px;height:27px;border-radius:999px;background:#c9c3b6;position:relative;flex:none}
+.tog i::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:transform .2s}
+.tog.on i{background:#2f6b4c}.tog.on i::after{transform:translateX(19px)}
+.note{background:#fff6e5;border-left:4px solid #c27a12;padding:9px 12px;border-radius:10px;font-size:.88rem;margin:0 0 12px}.note.info{background:#eaf3ff;border-color:var(--foc)}
+.tabs{display:flex;gap:6px;background:var(--pap2);padding:4px;border-radius:14px;margin-bottom:12px}
+.tabs button{flex:1;border:0;background:none;border-radius:10px;min-height:40px;font-weight:700;cursor:pointer}.tabs button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.seat{border:1px solid var(--ln);border-radius:14px;padding:10px;margin-bottom:10px;background:#fff}
+.sh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}.sn{flex:1;min-width:0;overflow-wrap:anywhere}.step{display:grid;gap:6px;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;background:#eceff1;color:#5b6770}
+.pill.waiting{background:#fff2d6;color:#8a5a00}.pill.connecting{background:#e3efff;color:#1452b8}.pill.connected{background:#dff3e6;color:#1e6b3e}
+.pill.disconnected{background:#ffe9d6;color:#9a4a00}.pill.failed{background:#fde2e0;color:#a82a22}.pill.bot{background:#ece6fb;color:#5a3fb0}
+.adv{margin-top:12px;font-size:.85rem}.adv summary{cursor:pointer;font-weight:700}.adv pre{white-space:pre-wrap;word-break:break-all;background:#1e2a33;color:#cfe3ef;padding:8px;border-radius:10px;font-size:11px}
+.room{font-family:ui-monospace,Menlo,monospace;font-weight:800;letter-spacing:.15em;background:#fff;border-radius:8px;padding:2px 8px}
+/* game layout */
+.game{flex:1;min-height:0;display:grid;gap:8px;grid-template-columns:minmax(0,1fr) 352px;grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:"top top" "players tray" "board tray"}
+@media (max-width:820px){.game{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "players" "board" "tray"}}
+.top{grid-area:top;height:52px;display:flex;align-items:center;gap:8px;background:linear-gradient(180deg,rgba(20,34,60,.86),rgba(10,18,32,.8));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;border-radius:16px;padding:6px 6px 6px 8px;box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.12);min-width:0}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:1.1rem;flex:none}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(160deg,#ffd08a,#e2783a);box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.4),0 3px 8px rgba(0,0,0,.3)}.logo .goat{width:30px;height:28px}
+.turn{flex:1;min-width:0;display:flex;align-items:center;gap:6px;font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden}
+.tp{display:inline-flex;align-items:center;gap:5px;min-width:0;background:#fff;color:var(--ink);border-radius:999px;padding:2px 12px 2px 4px;font-weight:800;box-shadow:inset 0 0 0 2px var(--pc,#fff)}
+.tp span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tp .goat{width:26px;height:24px;flex:none}
+.rd{background:rgba(255,255,255,.14);border-radius:999px;padding:2px 10px}
+.last{background:#ffd890;color:#5a2e00;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.78rem;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.6}}
+.tools{display:flex;gap:5px;flex:none}
+@media (max-width:600px){.brand b,.rd{display:none}.ib{width:35px;height:35px}.logo{width:34px;height:34px}}
+/* players strip (the only scrollable strip) */
+.players{grid-area:players;position:relative;height:86px;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:12px 2px 6px;min-width:0;scrollbar-width:thin}
+.pc{flex:1 0 214px;max-width:320px;height:66px;scroll-snap-align:start;position:relative;display:flex;align-items:center;gap:9px;border-radius:16px;padding:0 10px 0 13px;
+background:linear-gradient(180deg,#fffdf9,#f1ead9);box-shadow:0 6px 16px rgba(4,10,22,.25),inset 0 1px 0 #fff;border:2px solid transparent}
+.pc::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:5px;border-radius:0 4px 4px 0;background:var(--pc)}
+.pc.act{border-color:var(--pc);box-shadow:0 0 0 3px rgba(255,255,255,.55),0 0 18px var(--pc),0 10px 22px rgba(4,10,22,.35)}
+.pav{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;background:radial-gradient(circle at 50% 28%,#ffffff,#d9e5f1 72%);box-shadow:inset 0 0 0 2.5px var(--pc),0 2px 6px rgba(0,0,0,.18)}.pav .goat{width:34px;height:31px}
+.pinfo{flex:1;min-width:0}.pname{display:flex;align-items:center;gap:5px;min-width:0}.pname b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bd{font-size:.64rem;font-weight:700;background:var(--pap2);color:var(--mut);border-radius:999px;padding:0 7px;white-space:nowrap}
+.ptk{display:flex;flex-wrap:nowrap;gap:3px;margin-top:4px;overflow:hidden}
+.tk{min-width:19px;height:18px;border-radius:6px;background:var(--cc);color:#fff;font-size:.68rem;font-weight:900;display:inline-grid;place-items:center;padding:0 4px;text-shadow:0 1px 0 rgba(0,0,0,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.3);flex:none}.tk.z{opacity:.22}
+.bc{height:18px;font-size:.64rem;font-weight:900;color:#5a3500;background:linear-gradient(160deg,#fff0b8,#e7a93a);border-radius:6px;padding:0 5px;display:inline-grid;place-items:center;white-space:nowrap;flex:none}
+.psc{text-align:right;flex:none;line-height:1}.psc b{font-size:1.5rem;font-weight:900;display:block}.psc small{font-size:.64rem;color:var(--mut)}
+.pturn{position:absolute;top:-10px;right:10px;background:var(--pc);color:#fff;font-size:.66rem;font-weight:800;padding:1px 8px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.nd{width:9px;height:9px;border-radius:50%;background:#c4413a;flex:none}.nd.connected{background:#2f8f57}
+@media (max-width:820px){.pc{flex-basis:186px;padding:0 8px 0 11px}.pav{width:36px;height:36px}.pav .goat{width:28px;height:26px}.psc b{font-size:1.25rem}}
+/* board */
+.board{grid-area:board;position:relative;min-height:0;min-width:0;display:flex;flex-direction:column;border-radius:var(--r);padding:8px 10px;overflow:hidden;
+box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.5);background:linear-gradient(180deg,#6aa2dc 0%,#a8cdef 38%,#ecdcb9 76%,#8db26f 100%)}
+.sky{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bhead{position:relative;z-index:2;flex:none;height:32px;display:flex;align-items:center;gap:5px;flex-wrap:nowrap;overflow:hidden;font-weight:800;font-size:.76rem;color:#1d2f3d}
+.lbl{background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.1)}.sp{flex:1}
+.hx{width:30px;height:27px;flex:none;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);display:inline-grid;place-items:center;font-weight:900;font-size:.74rem;color:#5a3500;background:linear-gradient(160deg,#fff3c2,#e3a136)}
+.hx.off{filter:grayscale(1);opacity:.3}
+.mts{position:relative;z-index:1;flex:1;min-height:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(4px,1.1vw,16px);padding-top:24px}
+.mt{position:relative;display:grid;grid-template-rows:repeat(5,minmax(0,1fr)) auto;row-gap:clamp(3px,.6vh,7px);min-width:0;min-height:0}
+.rock{grid-column:1;position:relative;z-index:0;margin:-20px -16% 0;clip-path:polygon(50% 0,58% 7%,63% 5%,72% 22%,78% 20%,100% 100%,0 100%,20% 30%,27% 26%,37% 6%,43% 9%);
+background:linear-gradient(100deg,rgba(255,255,255,.24) 0 44%,rgba(0,0,0,.2) 56% 100%),linear-gradient(180deg,rgba(0,0,0,0) 32%,var(--mc) 210%),linear-gradient(180deg,#c6d0dc,#8d9aab 45%,#5e697a 80%,#454f5d)}
+.rock::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ffffff,#e2eaf4);clip-path:polygon(50% 0,58% 7%,63% 5%,68% 14%,64% 19%,59% 14%,55% 21%,50% 15%,45% 22%,41% 15%,36% 19%,33% 13%,37% 6%,43% 9%)}
+.rock::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(162deg,rgba(255,255,255,.07) 0 2px,transparent 2px 15px),repeating-linear-gradient(20deg,rgba(0,0,0,.05) 0 2px,transparent 2px 19px)}
+.cell{grid-column:1;position:relative;z-index:1;min-height:0;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:0 4px;
+background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.12));border:1.5px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 5px rgba(20,30,45,.18)}
+.cell.sum{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(226,236,248,.7));border:2px solid #fff;box-shadow:0 0 0 2px rgba(255,214,140,.75),0 4px 12px rgba(20,30,45,.28)}
+.cell.sum.own{box-shadow:0 0 0 3px var(--own),0 0 24px var(--own),0 4px 12px rgba(0,0,0,.28)}
+.cell.foot{background:linear-gradient(180deg,rgba(116,164,90,.92),rgba(58,100,52,.95));border:1.5px solid rgba(255,255,255,.4);box-shadow:inset 0 2px 0 rgba(255,255,255,.2),0 3px 6px rgba(0,0,0,.2)}
+.cell.tg{outline:3px dashed #fff;outline-offset:-3px;background:rgba(47,124,246,.55);animation:pulse 1.1s infinite}
+.cell.burst{animation:burst .9s}@keyframes burst{0%{box-shadow:0 0 0 0 rgba(255,216,144,.95)}100%{box-shadow:0 0 0 22px rgba(255,216,144,0)}}
+.cell.shake{animation:shake .5s}@keyframes shake{25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.gw{--g:var(--gs);position:relative;flex:0 1 var(--g);min-width:3px;height:calc(var(--g)*.92)}
+.cell.sum .gw{--g:calc(var(--gs)*1.35)}
+.gw .goat{position:absolute;left:50%;bottom:0;width:var(--g);height:calc(var(--g)*.92);margin-left:calc(var(--g)/-2);filter:drop-shadow(0 0 1.2px rgba(255,255,255,.95)) drop-shadow(0 2px 2px rgba(0,0,0,.45))}
+.goat.hop{animation:hop .55s}@keyframes hop{0%{transform:translateY(10px) scale(.8)}50%{transform:translateY(-8px) scale(1.15)}}
+.cnt{position:absolute;right:2px;top:2px;background:rgba(15,25,40,.8);color:#fff;font-size:.6rem;font-weight:800;border-radius:999px;padding:0 5px;line-height:1.5}
+.flag{position:absolute;top:-16px;right:3px;width:15px;height:19px;color:var(--own);filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.fl{position:absolute;left:50%;top:-6px;transform:translateX(-50%);font-weight:900;color:#fff;font-size:1.15rem;text-shadow:0 2px 0 rgba(0,0,0,.45),0 0 8px rgba(0,0,0,.35);animation:up 1.2s forwards;pointer-events:none;z-index:4}
+@keyframes up{0%{opacity:0;transform:translate(-50%,8px)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-40px)}}
+.mfoot{grid-row:6;display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:4px;position:relative;z-index:2}
+.mnum{width:clamp(26px,4.4vh,40px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),transparent 45%),var(--mc);color:#fff;font-weight:900;font-size:clamp(.85rem,2.1vh,1.15rem);display:grid;place-items:center;border:2px solid rgba(255,255,255,.85);box-shadow:0 3px 0 rgba(0,0,0,.25),0 4px 10px rgba(0,0,0,.25);text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.msup{min-width:48px;justify-content:center;font-size:.7rem;font-weight:800;display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.82);border-radius:999px;padding:0 6px 0 2px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.mt.dep .mnum{filter:grayscale(.85);opacity:.7}
+.pb{position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:5;background:var(--foc);color:#fff;border-radius:999px;padding:0 9px;font-weight:900;font-size:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.coin{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-weight:900;font-size:.68rem;color:#fff;flex:none;text-shadow:0 1px 0 rgba(0,0,0,.4);border:1.5px solid rgba(0,0,0,.2);background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),transparent 45%),var(--cc)}
+.coin.xs{width:16px;height:16px;font-size:.52rem}
+@media (max-width:600px){.mts{gap:3px;padding-top:20px}.rock{margin:-16px -18% 0}.msup{min-width:34px;font-size:.58rem;padding:0 3px 0 1px}.hx{width:24px;height:22px;font-size:.6rem}.cell{border-radius:8px;padding:0 2px}.lbl{padding:2px 6px}}
+/* tray: fixed sections so nothing jumps */
+.tray{grid-area:tray;min-height:0;display:flex;flex-direction:column;gap:8px;overflow:hidden;padding:12px;border-radius:var(--r);background:linear-gradient(180deg,rgba(253,250,244,.97),rgba(240,232,217,.96));box-shadow:var(--sh),inset 0 1px 0 #fff}
+.thead{flex:none;height:56px;display:flex;align-items:center;gap:10px}
+.tav{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 50% 28%,#fff,#d9e5f1 72%);display:grid;place-items:center;box-shadow:inset 0 0 0 2.5px var(--pc),0 2px 6px rgba(0,0,0,.15);flex:none}.tav .goat{width:34px;height:31px}
+.tt{min-width:0;flex:1}.tt b{display:block;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tt small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:2.6em;color:var(--mut);font-size:.8rem;line-height:1.3}
+.dice{flex:none;height:calc(var(--die) + 40px);display:flex;justify-content:center;align-items:flex-start;gap:clamp(8px,1.4vw,14px);padding:11px 8px 0;border-radius:16px;
+background:radial-gradient(ellipse at 50% 25%,rgba(255,255,255,.14),transparent 70%),linear-gradient(180deg,#2f5d47,#203f33);box-shadow:inset 0 3px 10px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.07)}
+.dw{display:flex;flex-direction:column;align-items:center;gap:5px;width:calc(var(--die) + 4px)}
+.die{width:var(--die);height:var(--die);border-radius:22%;padding:12%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);background:linear-gradient(145deg,#fff,#ebe3d3);border:3px solid transparent;
+box-shadow:inset 0 -4px 0 rgba(0,0,0,.1),inset 0 2px 0 #fff,0 6px 12px rgba(0,0,0,.4);cursor:pointer;transition:transform .15s,border-color .15s}
+.die:disabled{cursor:default}span.die{cursor:default}
+.die i{width:80%;aspect-ratio:1;border-radius:50%;place-self:center;background:#1f2a33;visibility:hidden;box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}.die i.on{visibility:visible}.die.one i.on{background:#d0463d;width:95%}
+.die.blank{display:grid;place-items:center;grid-template-columns:1fr;grid-template-rows:1fr;opacity:.32;font-weight:900;font-size:1.3rem;color:#6d6455}
+.die.sel{transform:translateY(-7px);border-color:#ffd25e;box-shadow:0 0 0 3px rgba(255,210,94,.45),0 12px 18px rgba(0,0,0,.45)}
+.die.g0{border-color:var(--g0)}.die.g1{border-color:var(--g1)}.die.g2{border-color:var(--g2)}.die.g3{border-color:var(--g3)}
+.die.wild{background:linear-gradient(145deg,#fff8e0,#f3da98)}
+.die.roll{animation:tumble .6s}@keyframes tumble{30%{transform:rotate(160deg) scale(.82)}60%{transform:rotate(300deg) scale(1.08)}100%{transform:rotate(360deg)}}
+.gt{font-size:.66rem;font-weight:800;color:#fff;border-radius:999px;padding:0 7px;height:19px;line-height:19px;white-space:nowrap}.gt.g0{background:var(--g0)}.gt.g1{background:var(--g1)}.gt.g2{background:var(--g2)}.gt.g3{background:var(--g3)}
+.wb{border:0;background:#ffe7a8;color:#6a4100;font-weight:800;font-size:.66rem;border-radius:999px;padding:0 7px;cursor:pointer;height:19px}
+.work{flex:1 1 0;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px;border-radius:14px;padding:8px;background:rgba(22,36,48,.045);box-shadow:inset 0 0 0 1px var(--ln)}
+.tip{margin:auto;text-align:center;color:var(--mut);font-size:.84rem;padding:4px}
+.wr{background:#fff8e6;border-radius:12px;padding:6px 8px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:.85rem}
+.fb{width:34px;height:34px;border-radius:9px;border:2px solid var(--ln);background:#fff;font-weight:900;cursor:pointer}.fb.on{background:#1f4a35;color:#fff;border-color:#1f4a35}.fb:disabled{opacity:.3;cursor:not-allowed}
+.groups{display:flex;flex-wrap:wrap;gap:5px}
+.gc{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 4px 2px 10px;background:#fff;box-shadow:inset 0 0 0 2px var(--g0);font-weight:700;font-size:.84rem}
+.gc.g1{box-shadow:inset 0 0 0 2px var(--g1)}.gc.g2{box-shadow:inset 0 0 0 2px var(--g2)}.gc.g3{box-shadow:inset 0 0 0 2px var(--g3)}
+.gx{border:0;background:var(--pap2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:900;line-height:1}
+.pv{background:#eaf3ff;border-radius:12px;padding:6px 10px;font-size:.84rem;line-height:1.35}
+.bn{font-size:.86rem;background:#f1ecfb;border-radius:12px;padding:7px 11px;color:#3b2c6b}
+.nb{border-radius:12px;padding:6px 10px;font-size:.84rem;font-weight:600;background:#ffe9d6;color:#7a3a00;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tfoot{flex:none;display:flex;flex-direction:column;gap:6px}
+.acts{display:flex;gap:6px;height:48px}.acts .btn{flex:1 1 0;min-width:0;height:48px;padding-left:.4em;padding-right:.4em}.acts .cm{flex:1.7 1 0}
+.lastlog{height:30px;border:0;background:rgba(22,36,48,.06);border-radius:10px;padding:0 9px;font-size:.78rem;color:var(--mut);text-align:left;display:flex;gap:6px;align-items:center;cursor:pointer;width:100%}
+.lastlog span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lastlog .ic{width:15px;height:15px}
+@media (max-width:820px){:root{--die:clamp(40px,11.5vw,52px)}.tray{padding:9px;gap:6px}.thead{height:48px}.work{flex:none;height:78px}.lastlog{display:none}}
+/* modal */
+#modal{position:fixed;inset:0;z-index:50;background:rgba(8,16,28,.6);display:flex;align-items:center;justify-content:center;padding:12px;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.mc{background:var(--pap);border-radius:20px;width:min(540px,100%);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:auto;padding:18px;box-shadow:0 30px 60px rgba(0,0,0,.4);animation:pop .22s}
+@keyframes pop{from{transform:translateY(10px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.mc.w{width:min(820px,100%)}.mc h2{margin:0 0 8px;font-size:1.3rem}.mc h3{margin:14px 0 4px;font-size:1rem}.mc p,.mc li{font-size:.93rem}
+.ma{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}.ma.st{flex-direction:column;align-items:stretch}
+.art{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;padding:14px;background:linear-gradient(180deg,#c3dcf0,#efe2c4);border-radius:14px;margin:8px 0 12px;min-height:90px;--die:44px}
+.art .goat{width:52px;height:48px}.art .coin{width:30px;height:30px;font-size:.8rem}.art .hx{width:42px;height:37px;font-size:1rem}
+.tw{overflow-x:auto}.tb{border-collapse:collapse;width:100%;font-size:.84rem}.tb th,.tb td{padding:5px 6px;border-bottom:1px solid var(--ln);text-align:center}.tb .l{text-align:left;white-space:nowrap}.tb .l .goat{display:inline-block;vertical-align:middle;width:24px;height:22px}
+.tb tr.win{background:#fff4d4}.tb tr.ext td{background:#f6f1ff}.eh{text-align:center}.eh .goat{display:inline-block;width:72px;height:66px}.et{font-size:1.9rem;margin:4px 0}
+.dots{display:flex;gap:6px;justify-content:center}.dots i{width:8px;height:8px;border-radius:50%;background:#cfc6b4}.dots i.on{width:22px;border-radius:999px;background:#2f6b4c}
+.log{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:5px;font-size:.85rem}
+.log li{background:#fff;border-radius:10px;padding:6px 10px;border-left:4px solid var(--lc,#ccc)}.log li.sys{background:#2b1a0e;color:#ffd890}.log .why{color:#5a3fb0;font-style:italic}
+.sg{display:grid;gap:7px}.sgb{border:0;text-align:left;background:#fff;border-radius:12px;padding:9px 12px;cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--ln)}.sgb:hover{box-shadow:inset 0 0 0 2px var(--foc)}.sgb small{display:block;color:var(--mut)}
+.tout{max-height:240px;overflow:auto;font-size:.82rem;background:#fff;border-radius:10px;padding:8px;margin-top:6px}.ok{color:#2f8f57}.bad{color:#b3352d}
+#toasts{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:60;display:grid;gap:6px;width:min(440px,92vw);pointer-events:none}
+.toast{background:#1d2a33;color:#fff;border-radius:12px;padding:9px 14px;font-weight:600;font-size:.9rem;border-left:5px solid #8fb8de;box-shadow:0 8px 20px rgba(0,0,0,.3);animation:pop .25s}
+.toast.good{border-left-color:#5fd18e}.toast.warn{border-left-color:#ffb547}.toast.err{border-left-color:#ff6b5f}
+#boot{position:fixed;left:8px;right:8px;bottom:8px;z-index:70;background:#fff3c4;color:#4a3300;border-radius:12px;padding:10px 14px;font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.3);cursor:pointer}
+#boot.e{background:#fde2e0;color:#7a1d16}
+/* ===== HALLOWEEN HORROR THEME ===== */
+:root{--ink:#1d1424;--mut:#6a5a78;--pap:#f1e5c8;--pap2:#e0cfa8;--ln:rgba(40,20,50,.18);--foc:#ffb347;
+--m5:#7ccf3a;--m6:#17b8a0;--m7:#4f8dff;--m8:#a070ff;--m9:#f0489c;--m10:#ff8a1f;
+--glass:rgba(243,232,205,.96);--sh:0 16px 36px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.4);
+--die:clamp(30px,4.4vh,38px);--gs:clamp(20px,min(4.8vh,3.6vw),52px)}
+body{background:radial-gradient(ellipse at 82% 10%,rgba(255,90,30,.26),transparent 45%),linear-gradient(180deg,#05030a 0%,#14082a 35%,#2a0f3a 62%,#4a1230 85%,#220a18 100%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5))}
+.bg svg{height:82%}
+.bat{animation:fly 22s linear infinite}@keyframes fly{from{transform:translate(-120px,0)}to{transform:translate(1550px,-60px)}}
+.moon{animation:flick 5s ease-in-out infinite}@keyframes flick{0%,100%{opacity:.95}45%{opacity:.78}50%{opacity:1}}
+.fog{animation:drift 32s ease-in-out infinite alternate}@keyframes drift{to{transform:translateX(90px)}}
+#app{max-width:1800px}
+.grn{background:linear-gradient(180deg,#78d83c,#2f7a1f);box-shadow:0 4px 0 #1b4a12,inset 0 1px 0 rgba(255,255,255,.3)}
+.title{background:linear-gradient(180deg,#fff3d6,#ffb04a 50%,#e5391f);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(60,0,0,.7)) drop-shadow(0 0 22px rgba(255,90,20,.55))}
+.sub{color:#9dff6a;text-shadow:0 0 10px rgba(120,255,60,.6)}
+.hero-art{filter:drop-shadow(0 0 26px rgba(255,100,20,.45)) drop-shadow(0 14px 24px rgba(0,0,0,.6))}
+#modal{background:rgba(5,2,12,.78)}
+.mc{border:1px solid rgba(255,140,60,.45);box-shadow:0 30px 70px rgba(0,0,0,.7),0 0 30px rgba(255,100,20,.2)}
+.art{background:linear-gradient(180deg,#1d0d38,#4a1838)}
+.toast{background:#1a0f26;border-left-color:#ff8a1f}
+.tb tr.win{background:#ffe9b0}
+/* game: board first */
+.game{gap:6px;grid-template-columns:minmax(0,1fr) 236px;grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:"top top" "players tray" "board tray"}
+.top{height:44px;padding:4px 5px 4px 6px;border-radius:14px;background:linear-gradient(180deg,rgba(46,20,70,.94),rgba(16,8,28,.94));border:1px solid rgba(255,140,60,.35);box-shadow:var(--sh),0 0 18px rgba(255,100,20,.15),inset 0 1px 0 rgba(255,200,150,.15)}
+.logo{width:32px;height:32px;background:radial-gradient(circle at 40% 35%,#ffb066,#d9440f 70%)}.logo .goat{width:26px;height:24px}
+.brand b{color:#ffb066;text-shadow:0 0 10px rgba(255,110,30,.6)}
+.top .ib{width:34px;height:34px}
+.tp{background:#1b1028;color:#ffe9c4}.rd{background:rgba(255,255,255,.1)}.last{background:#ff5a1f;color:#fff}
+.players{height:58px;padding:11px 2px 3px}
+.pc{flex:1 0 176px;max-width:240px;height:44px;gap:7px;padding:0 8px 0 11px;border-radius:12px;background:linear-gradient(180deg,#2e1a44,#170e25);border:1.5px solid rgba(180,140,230,.28);box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1)}
+.pc::before{top:7px;bottom:7px}
+.pc.act{border-color:var(--pc);box-shadow:0 0 0 2px rgba(255,255,255,.22),0 0 16px var(--pc),0 6px 14px rgba(0,0,0,.5)}
+.pav{width:32px;height:32px;background:radial-gradient(circle at 50% 28%,#4a3566,#1a1026 75%)}.pav .goat{width:25px;height:23px}
+.pname b{color:#ffe9c4;font-size:.84rem}
+.bd{background:rgba(255,255,255,.12);color:#cbbbe0;font-size:.58rem;padding:0 5px}
+.ptk{margin-top:2px;gap:2px}.tk{min-width:15px;height:14px;font-size:.58rem;border-radius:4px;padding:0 3px}.bc{height:14px;font-size:.56rem}
+.psc b{color:#fff;font-size:1.15rem}.psc small{color:#bfb0d6;font-size:.55rem}
+.pturn{top:-9px;font-size:.58rem;padding:0 6px}
+.board{padding:6px 8px;background:linear-gradient(180deg,#0a0518 0%,#1d0d38 38%,#3a1440 70%,#1a2a1c 100%);border:1px solid rgba(190,140,255,.28);box-shadow:var(--sh),inset 0 0 60px rgba(120,40,160,.25)}
+.bhead{height:26px;font-size:.7rem}
+.lbl{background:rgba(241,229,200,.92);color:#2a1638}
+.hx{width:26px;height:23px;font-size:.66rem;background:linear-gradient(160deg,#ffe49a,#e07a1f)}
+.mts{padding-top:18px;gap:clamp(4px,1vw,14px)}
+.rock{background:linear-gradient(100deg,rgba(255,255,255,.14) 0 44%,rgba(0,0,0,.34) 56% 100%),linear-gradient(180deg,rgba(0,0,0,0) 30%,var(--mc) 230%),linear-gradient(180deg,#8d8499,#5d5470 45%,#3a3050 80%,#241d36)}
+.rock::before{background:linear-gradient(180deg,#f7f1e0,#c5cdb6)}
+.cell{background:linear-gradient(180deg,rgba(30,14,50,.62),rgba(10,5,22,.5));border:1.5px solid rgba(200,165,255,.38);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 6px rgba(0,0,0,.45)}
+.cell.sum{background:linear-gradient(180deg,rgba(255,170,70,.55),rgba(120,30,50,.55));border:2px solid #ffc26b;box-shadow:0 0 0 2px rgba(255,120,30,.55),0 0 18px rgba(255,110,30,.5),0 4px 12px rgba(0,0,0,.5)}
+.cell.sum.own{box-shadow:0 0 0 3px var(--own),0 0 26px var(--own),0 4px 12px rgba(0,0,0,.5)}
+.cell.foot{background:linear-gradient(180deg,rgba(60,100,50,.9),rgba(20,44,26,.95));border:1.5px solid rgba(160,255,120,.28)}
+.cell.tg{outline:3px dashed #b8ff4a;outline-offset:-3px;background:rgba(120,230,60,.35)}
+.cnt{background:#ff5a1f}.msup{background:rgba(241,229,200,.92);color:#2a1638}.pb{background:#7cff3a;color:#10240a}
+.gw .goat{filter:drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 2px 3px rgba(0,0,0,.7))}
+/* tray: compact */
+.tray{padding:8px;gap:6px;background:linear-gradient(180deg,#2c1a42,#140b21);border:1px solid rgba(180,140,230,.3);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.1)}
+.thead{height:42px;gap:7px}
+.tav{width:34px;height:34px;background:radial-gradient(circle at 50% 28%,#4a3566,#1a1026 75%)}.tav .goat{width:27px;height:25px}
+.tt b{color:#ffe9c4;font-size:.88rem}.tt small{color:#bfb0d6;font-size:.7rem;height:2.5em;line-height:1.25}
+.dice{height:calc(var(--die) + 34px);gap:clamp(4px,.7vw,8px);padding:8px 4px 0;background:radial-gradient(ellipse at 50% 20%,rgba(255,120,40,.18),transparent 70%),linear-gradient(180deg,#1d1030,#0c0616);box-shadow:inset 0 3px 10px rgba(0,0,0,.7),inset 0 0 0 2px rgba(255,140,60,.2)}
+.dw{gap:3px;width:calc(var(--die) + 2px)}
+.die{background:linear-gradient(145deg,#f6efdc,#d9cba8)}.die i{background:#2a1230}.die.one i.on{background:#d11f1f}
+.gt{font-size:.58rem;height:16px;line-height:16px;padding:0 5px}.wb{font-size:.58rem;height:16px;padding:0 5px}
+.work{padding:6px;gap:5px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(200,165,255,.2)}
+.tip{color:#bfb0d6;font-size:.78rem}.fb{width:30px;height:30px}
+.acts{height:auto;flex-wrap:wrap}.acts .btn{flex:1 1 28%;height:36px;font-size:.8rem}.acts .cm,.acts .wide{flex:1 1 100%;height:42px}
+.tray .soft{background:#3b2858;color:#f0e4ff}
+.lastlog{height:26px;font-size:.72rem;background:rgba(255,255,255,.07);color:#bfb0d6}
+@media (max-width:820px){
+:root{--die:clamp(30px,8.6vw,38px)}
+.game{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "players" "board" "tray"}
+.pc{flex-basis:150px}
+.tray{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"thead thead" "dice work" "tfoot tfoot";gap:5px;padding:6px}
+.thead{grid-area:thead;height:36px}.tt small{height:auto;-webkit-line-clamp:2;font-size:.66rem}
+.dice{grid-area:dice;height:auto;min-height:calc(var(--die) + 30px);padding:6px 4px}
+.work{grid-area:work;flex:none;height:auto;max-height:calc(var(--die) + 34px)}
+.tfoot{grid-area:tfoot}.acts{flex-wrap:nowrap}.acts .btn{flex:1 1 0;height:40px}.acts .cm{flex:1.6 1 0;height:40px}.acts .wide{flex:1 1 100%;height:40px}
+.lastlog{display:none}}
+@media (max-height:560px) and (min-width:821px){:root{--die:28px}.lastlog,.tt small{display:none}.thead{height:36px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="gt" viewBox="0 0 48 44">
+<ellipse cx="23" cy="41.6" rx="16" ry="2.1" fill="#000" opacity=".2"/>
+<path d="M7.6 18.6 3.8 16l1.2 4.6z" fill="currentColor" stroke="#1b1612" stroke-width="1" stroke-linejoin="round"/>
+<g stroke="#1b1612" stroke-width="1.1" stroke-linejoin="round" fill="currentColor">
+<path d="M11.5 27.5 11 40h3l1.2-11.5z"/><path d="M17.5 29 17.4 40h2.9l.9-10.6z"/><path d="M28 29.2 28.6 40h2.9l-.2-11z"/><path d="M33 27.4 34.2 40h3l-.7-13.6z"/>
+<path d="M7 21.5c0-5.6 5-8.6 12.4-8.6h9.4c3 0 5.2-1.2 7-3.4l3.6 4.8c1.2 2.8-.4 5.8-2.6 7.8-2.2 4.6-6.6 7.6-13.4 7.6h-7.6C10.6 29.7 7 26.6 7 21.5z"/>
+<path d="M34.6 11.4 37.4 5c.9-1.8 3.2-2.4 4.7-1.1l3.8 4.9c.9 1.3.4 3-1 3.6l-4.6 1.7-2.3 3z"/></g>
+<g fill="#1b1612"><rect x="10.8" y="38.6" width="3.4" height="2" rx=".6"/><rect x="17.2" y="38.6" width="3.2" height="2" rx=".6"/><rect x="28.5" y="38.6" width="3.2" height="2" rx=".6"/><rect x="34" y="38.6" width="3.4" height="2" rx=".6"/></g>
+<path d="M8.4 24.6c2.6 3.4 6.6 5.1 11.6 5.1h7.6c5.6 0 9.6-2.4 11.6-6.2-3.2 1.8-7 2.6-12 2.6h-8.6c-4.4 0-7.8-.6-10.2-1.5z" fill="#000" opacity=".22"/>
+<path d="M11 15.6c2.8-1.5 6.4-2 11.4-2h6.2" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M35.8 14.8c1.5 2.5 1.3 5.8-.6 8.3" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M37.4 7.6 33 9l2.9 1.8z" fill="currentColor" stroke="#1b1612" stroke-width=".9" stroke-linejoin="round"/>
+<path d="M39.4 4.6C38 .6 33.4-.6 30.3 1.6c-1.7 1.3-2.2 3.4-1.5 5.3" fill="none" stroke="#3b2f24" stroke-width="4" stroke-linecap="round"/>
+<path d="M39.4 4.6C38 .6 33.4-.6 30.3 1.6c-1.7 1.3-2.2 3.4-1.5 5.3" fill="none" stroke="#efdcb4" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M36.6 1.4l-.6 1.6M33.6 1l.1 1.7M31 2.4l.9 1.3" stroke="#a8916a" stroke-width=".8" stroke-linecap="round"/>
+<path d="M43.2 12.9l.5 4.9-2.6-3.8z" fill="#efe4cc" stroke="#1b1612" stroke-width=".6" stroke-linejoin="round"/>
+<circle cx="40.8" cy="7.9" r="2.7" fill="#ff2a1a" opacity=".35"/><circle cx="40.8" cy="7.9" r="1.4" fill="#ff3322"/><circle cx="41.2" cy="7.5" r=".45" fill="#fff3a0"/><path d="M44 11.4l.5 2.3.9-2.1z" fill="#fff" stroke="#1b1612" stroke-width=".35"/><circle cx="45.2" cy="9.6" r=".6" fill="#120e0b"/>
+</symbol>
+<symbol id="flag" viewBox="0 0 20 24"><path d="M4 2v21" stroke="#3b2f2a" stroke-width="2"/><path d="M5 3h12l-3.5 4 3.5 4H5z" fill="currentColor" stroke="#3b2f2a"/></symbol>
+<symbol id="snd" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.6 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="mute" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="pse" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></symbol>
+<symbol id="help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.2a2.6 2.6 0 1 1 3.6 2.4c-.8.4-1.1.9-1.1 1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.2" fill="currentColor"/></symbol>
+<symbol id="list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="4" cy="6" r="1.4" fill="currentColor"/><circle cx="4" cy="12" r="1.4" fill="currentColor"/><circle cx="4" cy="18" r="1.4" fill="currentColor"/></symbol>
+<symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+<symbol id="dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/><circle cx="16" cy="16" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></symbol>
+<symbol id="crown" viewBox="0 0 24 24"><path d="M3 18 4.5 7l5 5L12 4l2.5 8 5-5L21 18z" fill="currentColor"/><rect x="3" y="19" width="18" height="2.4" rx="1" fill="currentColor"/></symbol>
+<symbol id="bot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4" fill="currentColor"/><circle cx="9" cy="13" r="1.8" fill="#000" opacity=".45"/><circle cx="15" cy="13" r="1.8" fill="#000" opacity=".45"/><path d="M12 3v4" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.5" fill="currentColor"/><circle cx="16.5" cy="9" r="3" fill="currentColor"/><path d="M1.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5zM14 20c0-2.5-.6-4.4-1.8-5.6 1.1-.6 2.3-.9 4.3-.9 3 0 5.5 2.2 5.5 6.5z" fill="currentColor"/></symbol>
+<symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 12h19M12 2.5c3 3 3 16 0 19M12 2.5c-3 3-3 16 0 19" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</defs></svg>
+<div class="bg" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice"><defs><radialGradient id="mg" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff7a2f" stop-opacity=".55"/><stop offset=".5" stop-color="#ff3d1f" stop-opacity=".16"/><stop offset="1" stop-color="#ff3d1f" stop-opacity="0"/></radialGradient></defs><circle cx="1130" cy="170" r="270" fill="url(#mg)"/><g class="moon"><circle cx="1130" cy="170" r="78" fill="#ff7a2f"/><circle cx="1105" cy="148" r="13" fill="#d9531a" opacity=".55"/><circle cx="1150" cy="198" r="10" fill="#d9531a" opacity=".5"/><circle cx="1160" cy="140" r="6" fill="#d9531a" opacity=".5"/></g><path d="M0 330 90 250 170 290 280 170 360 250 450 200 560 300 680 190 780 270 900 150 1010 260 1120 210 1240 290 1340 230 1440 280V600H0Z" fill="#2a1446"/><path d="M280 170 300 196 284 192 270 200ZM900 150 922 182 904 176 888 186Z" fill="#cfc4b8" opacity=".5"/><path d="M0 420 110 340 220 390 340 290 450 380 570 320 700 410 830 300 960 400 1080 330 1200 410 1320 350 1440 400V600H0Z" fill="#1b0d30"/><g fill="none" stroke="#07030d" stroke-width="7" stroke-linecap="round"><path d="M120 600V455M120 500 82 452M120 478 160 428M160 428 184 402M82 452 62 442M120 520 150 490"/><path d="M1330 600V440M1330 490 1368 440M1330 470 1292 424M1292 424 1272 400M1368 440 1388 428"/></g><path d="M0 525C200 498 420 540 640 518 860 496 1080 540 1440 508V600H0Z" fill="#0b0612"/><path d="M300 570v-30a14 14 0 0 1 28 0v30zM360 575v-22a11 11 0 0 1 22 0v22zM980 572v-28a13 13 0 0 1 26 0v28z" fill="#150c20"/><g transform="translate(1235 556)"><ellipse rx="28" ry="22" fill="#ff7a1f"/><ellipse rx="12" ry="22" fill="#ff9a3c" opacity=".6"/><path d="M-4-22 0-30 5-22z" fill="#3a7a1f"/><path d="M-16-6 -8-14 -3-5zM3-5 8-14 16-6zM-14 6Q0 16 14 6L8 10 4 6 0 11-4 6-8 10Z" fill="#2a0a00"/></g><g class="fog"><ellipse cx="250" cy="540" rx="300" ry="30" fill="#b9a6d6" opacity=".13"/><ellipse cx="900" cy="560" rx="360" ry="34" fill="#b9a6d6" opacity=".12"/></g><g transform="translate(0 120)" fill="#07030d"><path class="bat" d="M0 0 L-6 -8 Q-14 -11 -25 -2 Q-18 -2 -16 4 Q-10 0 -6 6 L0 3 L6 6 Q10 0 16 4 Q18 -2 25 -2 Q14 -11 6 -8Z"/></g><g transform="translate(0 220) scale(.7)" fill="#07030d"><path class="bat" style="animation-duration:27s;animation-delay:-11s" d="M0 0 L-6 -8 Q-14 -11 -25 -2 Q-18 -2 -16 4 Q-10 0 -6 6 L0 3 L6 6 Q10 0 16 4 Q18 -2 25 -2 Q14 -11 6 -8Z"/></g><g transform="translate(0 70) scale(.5)" fill="#07030d"><path class="bat" style="animation-duration:21s;animation-delay:-4s" d="M0 0 L-6 -8 Q-14 -11 -25 -2 Q-18 -2 -16 4 Q-10 0 -6 6 L0 3 L6 6 Q10 0 16 4 Q18 -2 25 -2 Q14 -11 6 -8Z"/></g></svg></div>
+<div id="app"></div>
+<div id="modal" hidden></div>
+<div id="toasts" aria-live="polite"></div>
+<div id="boot">กำลังโหลดเกม… ถ้าข้อความนี้ไม่หายไป แสดงว่าสคริปต์ไม่ได้ทำงาน (โค้ดอาจคัดลอกมาไม่ครบ)</div>
+<script>
+(function(){
+'use strict';
+var BOOT=document.getElementById('boot');
+function bootMsg(m,e){BOOT.hidden=false;BOOT.className=e?'e':'';BOOT.textContent=m;}
+window.addEventListener('error',function(e){bootMsg('เกิดข้อผิดพลาด: '+(e.message||'ไม่ทราบสาเหตุ')+' — แตะเพื่อปิด',true);});
+BOOT.addEventListener('click',function(){BOOT.hidden=true;});
+
+/* ===== RULES ===== */
+/* ตัวเลขฐาน (4 คน) — แก้ได้ถ้าฉบับของคุณต่างจากนี้ */
+const MT=[5,6,7,8,9,10],H={5:4,6:4,7:3,8:3,9:2,10:2},TK={5:10,6:9,7:8,8:7,9:6,10:5},MAXP=8;
+/* เหรียญต่อกอง: 2–4 คนตามต้นฉบับ, 5–8 คน (กติกาขยาย) เพิ่ม 20% ของจำนวนเดิมต่อผู้เล่นที่เกิน 4 คน */
+function TOK(n){const o={};MT.forEach(m=>{o[m]=n<=2?TK[m]-2:n===3?TK[m]-1:n===4?TK[m]:Math.round(TK[m]*(10+2*(n-4))/10);});return o;}
+/* โบนัสครบชุด: จำนวนแผ่น = max(4, ผู้เล่น) ไล่ค่า 15 → 6 (4 แผ่น = 15,12,9,6 ตามต้นฉบับ) */
+function BONL(n){const k=Math.max(4,n),o=[];for(let i=0;i<k;i++)o.push(Math.round(15-9*i/(k-1)));return o;}
+const COL=['#e4572e','#2e86de','#f2b134','#8e5bd6','#22a06b','#e84393','#14b8a6','#8a5a3c'];
+const COLN=['ส้ม','ฟ้า','เหลือง','ม่วง','เขียว','ชมพู','เทอร์ควอยซ์','น้ำตาล'];
+const BOTN=['ภูผา','ดอยคำ','หมอกฟ้า','ผาแดง','ยอดดอย','สายหมอก','พนาไพร','ผาหิน'];
+const DIFF={easy:'ง่าย',normal:'ปกติ',hard:'ยาก'},DIFF_D={easy:'ตัดสินใจหลวม ๆ บางครั้งเดินแบบสุ่ม',normal:'คิดเรื่องคะแนน ความเสี่ยงโดนไล่ และชุดโบนัส',hard:'เลือกตาที่ดีที่สุดเสมอ และกดดันคู่แข่ง'};
+const PIPS={1:[4],2:[2,6],3:[2,4,6],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+const STAT={idle:'ยังไม่เชื่อมต่อ',waiting:'รอรหัสตอบกลับ',connecting:'กำลังเชื่อมต่อ…',connected:'เชื่อมต่อแล้ว',disconnected:'หลุดการเชื่อมต่อ',failed:'เชื่อมต่อไม่สำเร็จ'};
+
+/* ===== UTIL ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let CRY=false;try{crypto.getRandomValues(new Uint32Array(1));CRY=true;}catch(e){}
+function rnd(n){if(CRY){const a=new Uint32Array(1),lim=Math.floor(4294967296/n)*n;do{crypto.getRandomValues(a);}while(a[0]>=lim);return a[0]%n;}return Math.floor(Math.random()*n);}
+const clone=o=>JSON.parse(JSON.stringify(o));
+function rid(){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=A[rnd(A.length)];return s;}
+function cleanName(v,fb){v=String(v==null?'':v).replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,16);return v||fb;}
+let LS=null;try{LS=window.localStorage;LS.setItem('__t','1');LS.removeItem('__t');}catch(e){LS=null;}
+function load(k,d){try{const v=LS&&LS.getItem('mg5_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){try{if(LS)LS.setItem('mg5_'+k,JSON.stringify(v));}catch(e){}}
+
+/* ===== ENGINE (pure rules) ===== */
+const E=(function(){
+  const PARTS=[];(function rec(i,b){if(i===4){PARTS.push(b.map(x=>x.slice()));return;}for(const g of b){g.push(i);rec(i+1,b);g.pop();}b.push([i]);rec(i+1,b);b.pop();})(0,[]);
+  const zero=()=>{const o={};MT.forEach(m=>o[m]=0);return o;};
+  function create(ps,first){const n=ps.length;
+    return{v:1,id:rid(),seq:0,players:ps.map((p,i)=>({name:cleanName(p.name,'ผู้เล่น '+(i+1)),color:/^#[0-9a-f]{6}$/i.test(p.color||'')?p.color:COL[i%COL.length],kind:p.kind==='bot'?'bot':'human',diff:p.kind==='bot'?(DIFF[p.diff]?p.diff:'normal'):null,seat:Number.isInteger(p.seat)?p.seat:i,goats:zero(),tokens:zero(),bonus:[]})),
+      supply:TOK(n),bonus:BONL(n),first:first||0,cur:first||0,round:1,phase:'roll',dice:null,endTrig:false,endWhy:null,over:false,log:[]};}
+  function checkFaces(d,f){if(!Array.isArray(f)||f.length!==4)return'ข้อมูลลูกเต๋าไม่ถูกต้อง';let ones=0,kept=0;
+    for(let i=0;i<4;i++){const x=f[i];if(!Number.isInteger(x)||x<1||x>6)return'ค่าลูกเต๋าไม่ถูกต้อง';if(d[i]===1){ones++;if(x===1)kept++;}else if(x!==d[i])return'เปลี่ยนค่าได้เฉพาะลูกที่ทอยได้ 1';}
+    if(ones&&!kept)return'ต้องเหลือหน้า 1 อย่างน้อยหนึ่งลูก';return null;}
+  function checkGroups(g,f){if(!Array.isArray(g)||g.length>4)return{e:'การจัดกลุ่มไม่ถูกต้อง'};const used={},sums=[];
+    for(const grp of g){if(!Array.isArray(grp)||!grp.length||grp.length>4)return{e:'กลุ่มลูกเต๋าไม่ถูกต้อง'};let t=0;
+      for(const i of grp){if(!Number.isInteger(i)||i<0||i>3||used[i])return{e:'ลูกเต๋าหนึ่งลูกอยู่ได้เพียงกลุ่มเดียว'};used[i]=1;t+=f[i];}
+      if(t<5||t>10)return{e:'ผลรวม '+t+' ใช้ไม่ได้ (ต้องได้ 5–10)'};sums.push(t);}
+    return{sums};}
+  function take(s,pi,m,ev){if(s.supply[m]>0){s.supply[m]--;s.players[pi].tokens[m]++;ev.push({k:'token',p:pi,m});}else ev.push({k:'empty',p:pi,m});}
+  function step(s,pi,m,ev){const p=s.players[pi],h=H[m];
+    if(p.goats[m]<h){p.goats[m]++;ev.push({k:'move',p:pi,m,to:p.goats[m]});
+      if(p.goats[m]===h){s.players.forEach((o,oi)=>{if(oi!==pi&&o.goats[m]===h){o.goats[m]=0;ev.push({k:'knock',p:pi,v:oi,m});}});ev.push({k:'summit',p:pi,m});take(s,pi,m,ev);}}
+    else take(s,pi,m,ev);}
+  function apply(s0,a,actor,rng){rng=rng||rnd;
+    if(!s0||s0.over)return{e:'เกมจบแล้ว'};if(!a||typeof a!=='object')return{e:'คำสั่งไม่ถูกต้อง'};if(actor!==s0.cur)return{e:'ยังไม่ถึงตาของผู้เล่นนี้'};
+    const s=clone(s0),ev=[];
+    if(a.type==='roll'){if(s.phase!=='roll')return{e:'ทอยไปแล้วในตานี้'};s.dice=[0,0,0,0].map(()=>1+rng(6));s.phase='assign';s.seq++;ev.push({k:'roll'});return{s,ev};}
+    if(a.type==='commit'){if(s.phase!=='assign')return{e:'ต้องทอยลูกเต๋าก่อน'};
+      const fe=checkFaces(s.dice,a.faces);if(fe)return{e:fe};const gr=checkGroups(a.groups,a.faces);if(gr.e)return{e:gr.e};
+      const pi=s.cur,p=s.players[pi];gr.sums.forEach(m=>step(s,pi,m,ev));
+      const sets=Math.min.apply(null,MT.map(m=>p.tokens[m]));while(p.bonus.length<sets&&s.bonus.length){const b=s.bonus.shift();p.bonus.push(b);ev.push({k:'bonus',p:pi,b});}
+      s.log.push({p:pi,d:s.dice.slice(),f:a.faces.slice(),sums:gr.sums,ev:ev.slice(),note:p.kind==='bot'&&typeof a.note==='string'?a.note.slice(0,120):''});
+      if(!s.endTrig){const em=MT.filter(m=>s.supply[m]===0).length;if(em>=3||!s.bonus.length){s.endTrig=true;s.endWhy=em>=3?'piles':'bonus';ev.push({k:'endTrig'});s.log.push({sys:'end',why:s.endWhy});}}
+      const nx=(s.cur+1)%s.players.length;
+      if(s.endTrig&&nx===s.first){s.over=true;s.phase='over';s.dice=null;ev.push({k:'over'});s.log.push({sys:'over'});}
+      else{if(nx===s.first)s.round++;s.cur=nx;s.phase='roll';s.dice=null;}
+      if(s.log.length>60)s.log.splice(0,s.log.length-60);s.seq++;return{s,ev};}
+    return{e:'ไม่รู้จักคำสั่งนี้'};}
+  function variants(d){const ones=[];d.forEach((x,i)=>{if(x===1)ones.push(i);});if(ones.length<2)return[d.slice()];
+    const ch=ones.slice(1),out=[],tot=Math.pow(6,ch.length);for(let c=0;c<tot;c++){const f=d.slice();let x=c;ch.forEach(i=>{f[i]=1+x%6;x=Math.floor(x/6);});out.push(f);}return out;}
+  function options(d){const map={};variants(d).forEach(f=>PARTS.forEach(part=>{
+      const ok=part.filter(b=>{const t=b.reduce((a,i)=>a+f[i],0);return t>=5&&t<=10;});
+      for(let mask=0;mask<(1<<ok.length);mask++){const g=ok.filter((_,j)=>mask&(1<<j)),ms=g.map(b=>b.reduce((a,i)=>a+f[i],0)).sort((a,b)=>a-b),k=ms.join(',');
+        if(!map[k])map[k]={faces:f.slice(),groups:g.map(b=>b.slice()),ms};}}));
+    return Object.keys(map).map(k=>map[k]);}
+  const score=p=>MT.reduce((a,m)=>a+p.tokens[m]*m,0)+p.bonus.reduce((a,b)=>a+b,0);
+  const summits=p=>MT.filter(m=>p.goats[m]===H[m]).length;
+  function result(s){const rows=s.players.map((p,i)=>({i,name:p.name,color:p.color,tokens:p.tokens,bonus:p.bonus,tp:MT.reduce((a,m)=>a+p.tokens[m]*m,0),total:score(p),sm:summits(p)})).sort((a,b)=>b.total-a.total||b.sm-a.sm);
+    const t=rows[0];return{rows,win:rows.filter(r=>r.total===t.total&&r.sm===t.sm).map(r=>r.i)};}
+  function valid(s){try{
+    if(!s||s.v!==1||typeof s.id!=='string'||s.id.length>12||!Number.isInteger(s.seq))return false;
+    const P=s.players;if(!Array.isArray(P)||P.length<2||P.length>MAXP)return false;const n=P.length,BL=BONL(n),TT=TOK(n);
+    for(const p of P){if(!p||typeof p.name!=='string'||p.name.length>20||!/^#[0-9a-f]{6}$/i.test(p.color)||(p.kind!=='human'&&p.kind!=='bot')||(p.diff!==null&&!DIFF[p.diff])||!Number.isInteger(p.seat)||p.seat<0||p.seat>=MAXP||!Array.isArray(p.bonus)||p.bonus.some(b=>BL.indexOf(b)<0)||!p.goats||!p.tokens)return false;
+      for(const m of MT){const g=p.goats[m],t=p.tokens[m];if(!Number.isInteger(g)||g<0||g>H[m]||!Number.isInteger(t)||t<0)return false;}}
+    for(const m of MT){const v=s.supply&&s.supply[m];if(!Number.isInteger(v)||v<0)return false;if(v+P.reduce((a,p)=>a+p.tokens[m],0)!==TT[m])return false;if(P.filter(p=>p.goats[m]===H[m]).length>1)return false;}
+    if(!Array.isArray(s.bonus)||s.bonus.some(b=>BL.indexOf(b)<0)||s.bonus.length+P.reduce((a,p)=>a+p.bonus.length,0)!==BL.length)return false;
+    if(!Number.isInteger(s.cur)||s.cur<0||s.cur>=n||!Number.isInteger(s.first)||s.first<0||s.first>=n||!Number.isInteger(s.round))return false;
+    if(s.phase==='assign'){if(!Array.isArray(s.dice)||s.dice.length!==4||s.dice.some(d=>!Number.isInteger(d)||d<1||d>6))return false;}
+    else if((s.phase!=='roll'&&s.phase!=='over')||s.dice!==null)return false;
+    if(s.over!==(s.phase==='over')||typeof s.endTrig!=='boolean')return false;
+    if(!Array.isArray(s.log)||s.log.length>80)return false;
+    for(const e of s.log){if(!e||typeof e!=='object')return false;if(e.sys){if(e.sys!=='end'&&e.sys!=='over')return false;continue;}
+      if(!Number.isInteger(e.p)||e.p<0||e.p>=n||!Array.isArray(e.d)||!Array.isArray(e.f)||!Array.isArray(e.sums)||!Array.isArray(e.ev)||typeof e.note!=='string'||e.d.concat(e.f,e.sums).some(x=>!Number.isInteger(x)))return false;}
+    return true;}catch(e){return false;}}
+  return{PARTS,create,apply,variants,options,score,summits,result,valid,checkFaces,checkGroups};
+})();
+
+/* ===== AI ===== */
+const AI=(function(){
+  let P=null;
+  function probs(){if(P)return P;const h1={},h2={};MT.forEach(m=>{h1[m]=0;h2[m]=0;});const d=[0,0,0,0];
+    for(d[0]=1;d[0]<7;d[0]++)for(d[1]=1;d[1]<7;d[1]++)for(d[2]=1;d[2]<7;d[2]++)for(d[3]=1;d[3]<7;d[3]++){const best={};
+      E.variants(d).forEach(f=>E.PARTS.forEach(part=>{const c={};part.forEach(b=>{const t=b.reduce((a,i)=>a+f[i],0);if(t>=5&&t<=10)c[t]=(c[t]||0)+1;});for(const k in c)if(!best[k]||c[k]>best[k])best[k]=c[k];}));
+      MT.forEach(m=>{if(best[m]>=1)h1[m]++;if(best[m]>=2)h2[m]++;});}
+    MT.forEach(m=>{h1[m]/=1296;h2[m]/=1296;});return(P={h1,h2});}
+  const W={easy:{pr:.6,ho:.4,se:.2,op:0,no:5,ra:.35},normal:{pr:1,ho:1,se:.6,op:.35,no:1.2,ra:0},hard:{pr:1.1,ho:1.3,se:.9,op:.6,no:0,ra:0}};
+  function late(s){if(s.endTrig)return 1;const e=MT.filter(m=>!s.supply[m]).length,l=MT.filter(m=>s.supply[m]===1).length;return Math.min(.85,e*.28+l*.08+(s.bonus.length<=1?.3:0));}
+  function pv(s,pi,w){const pr=probs(),h1=pr.h1,h2=pr.h2,p=s.players[pi],L=late(s);let v=E.score(p);
+    MT.forEach(m=>{const h=H[m],pos=p.goats[m],sup=s.supply[m];if(!sup){if(pos===h)v+=.3;return;}const sc=Math.min(1,sup/3);
+      if(pos===h){let safe=1;s.players.forEach((o,oi)=>{if(oi===pi)return;const d=h-o.goats[m];if(d===1)safe*=1-h1[m];else if(d===2)safe*=1-h2[m];});v+=w.ho*m*h1[m]*(.5+1.5*safe)*sc*(1-L*.85)+m*.1;}
+      else v+=w.pr*m*h1[m]*Math.pow(pos/h,1.4)*(1-L*.9)*sc;});
+    if(s.bonus.length){const sets=Math.min.apply(null,MT.map(m=>p.tokens[m])),have=MT.filter(m=>p.tokens[m]>sets).length;
+      if(MT.every(m=>p.tokens[m]>sets||s.supply[m]>0))v+=w.se*s.bonus[0]*Math.pow(have/6,2)*(1-L*.7);}
+    return v;}
+  function evalS(s,me,w){let sum=0,best=-1e9;s.players.forEach((_,i)=>{if(i===me)return;const v=pv(s,i,w);sum+=v;if(v>best)best=v;});return pv(s,me,w)-w.op*(.5*best+.5*sum/(s.players.length-1));}
+  function rank(st,d){const w=W[d]||W.normal,s=Object.assign({},st,{log:[]}),me=s.cur,b=E.score(s.players[me]);
+    return E.options(s.dice).map(o=>{const a={type:'commit',faces:o.faces,groups:o.groups},r=E.apply(s,a,me,()=>0);return r.e?null:{a,ms:o.ms,ev:r.ev,val:evalS(r.s,me,w),gain:E.score(r.s.players[me])-b};}).filter(Boolean).sort((x,y)=>y.val-x.val);}
+  function explain(pk,s){const parts=[],tk={};pk.ev.forEach(e=>{if(e.k==='knock')parts.push('ไล่แพะของ '+s.players[e.v].name+' ลงจากยอด '+e.m);if(e.k==='token')tk[e.m]=(tk[e.m]||0)+1;if(e.k==='bonus')parts.push('ครบชุด รับโบนัส '+e.b);});
+    const t=Object.keys(tk);if(t.length)parts.push('เก็บเหรียญ '+t.map(m=>m+(tk[m]>1?' ×'+tk[m]:'')).join(', '));
+    if(!parts.length)parts.push(pk.ms.length?'ไต่ภูเขา '+pk.ms.filter((x,i,a)=>a.indexOf(x)===i).join(', ')+' เพื่อเตรียมขึ้นยอด':'ไม่มีการเดินที่คุ้มค่า จึงผ่านตา');return parts.join(' · ');}
+  function choose(s,d,R){R=R||Math.random;const w=W[d]||W.normal,L=rank(s,d);
+    if(!L.length)return{action:{type:'commit',faces:s.dice.slice(),groups:[],note:'ผ่านตา'},note:'ผ่านตา'};
+    let pk;if(w.ra&&R()<w.ra){const mv=L.filter(o=>o.ms.length);pk=mv.length?mv[Math.floor(R()*mv.length)]:L[0];}
+    else if(w.no)pk=L.map(o=>({o,v:o.val+(R()*2-1)*w.no})).sort((a,b)=>b.v-a.v)[0].o;else pk=L[0];
+    const note=explain(pk,s);return{action:Object.assign({},pk.a,{note}),note};}
+  return{rank,choose};
+})();
+
+/* ===== STATE ===== */
+const CFG=Object.assign({sound:true,motion:false,hand:true,speed:'normal',hints:true,stun:true,timeout:30,tut:false,name:''},load('cfg',{}));
+const saveCfg=()=>save('cfg',CFG);
+const STATS=Object.assign({played:0,wins:0,best:0},load('stats',{}));
+const G={screen:'menu',mode:null,s:null,me:0,f:null,g:[],sel:[],wild:-1,sugg:null,any:true,rolling:false,pending:false,hand:false,plan:null,fx:{},modal:null,botTok:0,timers:{},gameCfg:null,statId:'',testOut:'',lastCur:'',
+  form:{name:CFG.name,bots:'2',diff:'normal',color:'0',first:'random',lc:'2',ln0:'',ln1:'',ln2:'',ln3:'',ln4:'',ln5:'',ln6:'',ln7:'',hn:CFG.name,hc:'2',jn:CFG.name,inv:'',jerr:'',tab:'host',rj:'',rjout:'',rjerr:''}};
+const NET={role:null,room:'',name:'',n:2,seats:[],slot:0,conn:null,hostName:'',lobby:null,started:false,hostClosed:false,answer:'',beat:0,busy:false};
+
+/* ===== SOUND ===== */
+let AC=null;
+function snd(n){if(!CFG.sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+  const q={click:[[660,.05]],roll:[[300,.04],[420,.04],[360,.04],[500,.05]],move:[[440,.1],[560,.1]],summit:[[523,.12],[659,.12],[784,.2]],token:[[1200,.07],[1600,.09]],knock:[[220,.12],[150,.25]],bonus:[[784,.12],[988,.12],[1175,.12],[1568,.22]],end:[[523,.18],[659,.18],[784,.18],[1046,.32]],err:[[220,.12]]}[n]||[];
+  let t=AC.currentTime;q.forEach(x=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=x[0];g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+x[1]);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+x[1]+.02);t+=x[1]*.8;});}catch(e){}}
+
+/* ===== HTML HELPERS ===== */
+const ic=(id,c)=>'<svg class="ic'+(c?' '+c:'')+'" aria-hidden="true"><use href="#'+id+'"/></svg>';
+const goat=(c,cls)=>'<svg class="goat '+(cls||'')+'" viewBox="0 0 48 44" style="color:'+esc(c)+'" aria-hidden="true"><use href="#gt"/></svg>';
+const gw=(c,cls,z)=>'<span class="gw" style="z-index:'+z+'">'+goat(c,cls)+'</span>';
+const coin=(m,cls)=>'<span class="coin '+(cls||'')+'" style="--cc:var(--m'+m+')" aria-hidden="true">'+m+'</span>';
+function dieH(v,cls,attrs,tag){tag=tag||'button';let p='';for(let k=0;k<9;k++)p+='<i class="'+(PIPS[v].indexOf(k)>=0?'on':'')+'"></i>';
+  return'<'+tag+(tag==='button'?' type="button"':'')+' class="die '+(v===1?'one ':'')+(cls||'')+'" '+(attrs||'')+'>'+p+'</'+tag+'>';}
+const chip=(k,v,label)=>'<button type="button" class="chip '+(G.form[k]===v?'on':'')+'" aria-pressed="'+(G.form[k]===v)+'" data-a="form" data-v="'+k+':'+v+'">'+label+'</button>';
+const tog=(k,label)=>'<button type="button" class="tog '+(CFG[k]?'on':'')+'" aria-pressed="'+!!CFG[k]+'" data-a="cfg" data-v="'+k+'"><span>'+label+'</span><i></i></button>';
+const pill=(st,label)=>'<span class="pill '+st+'">'+esc(label||STAT[st]||st)+'</span>';
+function toast(t,c){const b=$('#toasts'),d=document.createElement('div');d.className='toast '+(c||'');d.textContent=t;b.appendChild(d);while(b.children.length>3)b.removeChild(b.firstChild);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},3400);}
+const nm=i=>G.s&&G.s.players[i]?G.s.players[i].name:'?';
+function describe(ev){const out=[],cl={},tk={};(ev||[]).forEach(e=>{if(!e)return;
+  if(e.k==='move'&&e.to<H[e.m])cl[e.m]=(cl[e.m]||0)+1;if(e.k==='summit')out.push('พิชิตยอดเขา '+e.m);if(e.k==='knock')out.push('ไล่แพะของ '+nm(e.v)+' ลงจากยอด '+e.m);
+  if(e.k==='token')tk[e.m]=(tk[e.m]||0)+1;if(e.k==='empty')out.push('เหรียญภูเขา '+e.m+' หมดแล้ว');if(e.k==='bonus')out.push('โบนัสครบชุด +'+e.b);});
+  const c=Object.keys(cl);if(c.length)out.unshift('ไต่ภูเขา '+c.map(m=>m+(cl[m]>1?' ×'+cl[m]:'')).join(', '));
+  const t=Object.keys(tk);if(t.length)out.push('ได้เหรียญ '+t.map(m=>m+(tk[m]>1?' ×'+tk[m]:'')).join(', '));return out.join(' · ');}
+
+/* ===== GAME CONTROLLER ===== */
+const isNet=()=>G.mode==='host'||G.mode==='guest';
+function resetUi(){const s=G.s;G.f=s&&s.dice?s.dice.slice():null;G.g=[];G.sel=[];G.wild=-1;G.sugg=null;G.plan=null;G.any=s&&s.dice?E.options(s.dice).some(o=>o.ms.length):true;}
+function mine(){const s=G.s;if(!s||s.over)return false;const p=s.players[s.cur];if(p.kind!=='human')return false;return G.mode==='local'||s.cur===G.me;}
+const canAct=()=>mine()&&!G.rolling&&!G.pending&&!G.hand&&!G.modal&&!G.plan;
+const actor=()=>G.mode==='local'?G.s.cur:G.me;
+function stopTimers(){Object.keys(G.timers).forEach(k=>clearTimeout(G.timers[k]));G.botTok++;}
+function begin(mode,ps,first,ex){stopTimers();G.mode=mode;G.s=null;G.screen='game';G.modal=null;G.hand=false;G.pending=false;G.plan=null;G.rolling=false;G.lastCur='';
+  setState(ex||E.create(ps,first),[]);if(!CFG.tut&&mode!=='guest')openModal({type:'tut',i:0});}
+function setState(s,ev){const p=G.s;ev=ev||[];G.s=s;
+  if(p&&p.id!==s.id&&G.modal&&G.modal.type==='end')G.modal=null;
+  if(!p||p.id!==s.id||p.cur!==s.cur||p.phase!==s.phase||p.round!==s.round)resetUi();
+  if(isNet())G.me=Math.max(0,s.players.findIndex(x=>x.seat===(G.mode==='host'?0:NET.slot)));else G.me=0;
+  G.fx={};playFx(ev);
+  if(ev.some(e=>e.k==='roll')){G.rolling=true;clearTimeout(G.timers.roll);G.timers.roll=setTimeout(()=>{G.rolling=false;render();},CFG.motion?0:650);}
+  render();G.fx={};
+  if(G.mode==='bots'||G.mode==='local')save('game',s.over?null:{mode:G.mode,s});
+  if(s.over){G.botTok++;clearTimeout(G.timers.end);G.timers.end=setTimeout(showEnd,CFG.motion?100:1300);}
+  else{handover(p);sched();}}
+function act(a,who){const s=G.s;if(!s)return false;
+  if(G.mode==='guest'){if(G.pending)return false;const pre=E.apply(s,a,who,()=>0);if(pre.e){toast(pre.e,'err');return false;}
+    if(!NET.conn||!NET.conn.send({t:'act',a:{type:a.type,faces:a.faces,groups:a.groups},seq:s.seq})){toast('ส่งคำสั่งไม่ได้ — ขาดการเชื่อมต่อกับโฮสต์','err');return false;}
+    G.pending=true;clearTimeout(G.timers.pend);G.timers.pend=setTimeout(()=>{if(G.pending){G.pending=false;render();toast('โฮสต์ไม่ตอบกลับ ลองอีกครั้ง','warn');}},10000);render();return true;}
+  const r=E.apply(s,a,who);if(r.e){toast(r.e,'err');snd('err');return false;}
+  setState(r.s,r.ev);if(G.mode==='host')hostBroadcast(r.ev);return true;}
+function playFx(ev){let mv=false;ev.forEach(e=>{
+  if(e.k==='roll')snd('roll');if(e.k==='move'){G.fx['g'+e.p+':'+e.m]=1;mv=true;}if(e.k==='summit'){G.fx[e.m+':'+H[e.m]]='burst';snd('summit');}
+  if(e.k==='token'){G.fx['pt'+e.m]=1;snd('token');}if(e.k==='knock'){G.fx[e.m+':0']='shake';snd('knock');toast(nm(e.p)+' ไล่แพะของ '+nm(e.v)+' ลงจากยอดเขา '+e.m,'warn');}
+  if(e.k==='bonus'){snd('bonus');toast(nm(e.p)+' สะสมครบชุด! รับโบนัส +'+e.b,'good');}if(e.k==='endTrig')toast('เงื่อนไขจบเกมครบแล้ว — เล่นต่อจนจบรอบนี้','warn');if(e.k==='over')snd('end');});
+  if(mv)snd('move');}
+function botOn(){const s=G.s;if(!s||s.over||s.players[s.cur].kind!=='bot'||(G.mode!=='bots'&&G.mode!=='host')||G.hand)return false;
+  return !G.modal||(G.mode==='host'&&G.modal.type!=='tut');}
+function sched(){clearTimeout(G.timers.bot);const tok=++G.botTok;if(!botOn())return;const sp={slow:1.7,normal:1,fast:.45}[CFG.speed]||1,s=G.s;
+  if(s.phase==='roll'){G.timers.bot=setTimeout(()=>{if(tok===G.botTok&&botOn())act({type:'roll'},G.s.cur);},650*sp);return;}
+  G.timers.bot=setTimeout(()=>{if(tok!==G.botTok||!botOn())return;let ch;
+    try{ch=AI.choose(G.s,G.s.players[G.s.cur].diff);}catch(e){ch={action:{type:'commit',faces:G.s.dice.slice(),groups:[]},note:'ผ่านตา'};}
+    G.plan=ch;G.f=ch.action.faces.slice();G.g=ch.action.groups.map(x=>x.slice());render();
+    G.timers.bot=setTimeout(()=>{if(tok!==G.botTok||!botOn())return;if(!act(ch.action,G.s.cur))act({type:'commit',faces:G.s.dice.slice(),groups:[]},G.s.cur);},1200*sp);},850*sp);}
+function handover(p){const s=G.s;if(G.mode!=='local'||!CFG.hand||s.over||s.phase!=='roll'||!p||p.id!==s.id||p.cur===s.cur)return;
+  G.hand=true;clearTimeout(G.timers.hand);
+  const show=()=>{if(!G.hand||G.screen!=='game')return;if(G.modal){G.timers.hand=setTimeout(show,400);return;}openModal({type:'hand'});};
+  G.timers.hand=setTimeout(show,CFG.motion?50:900);}
+function showEnd(){const s=G.s;if(!s||!s.over)return;const r=E.result(s);
+  if(G.statId!==s.id){G.statId=s.id;STATS.played++;if(G.mode!=='local'){if(r.win.indexOf(G.me)>=0)STATS.wins++;STATS.best=Math.max(STATS.best,E.score(s.players[G.me]));}save('stats',STATS);}
+  openModal({type:'end'});}
+function planInfo(){const s=G.s;if(!s||s.phase!=='assign'||!G.f||!G.g.length)return null;const p=s.players[s.cur],c={},d={};
+  G.g.forEach(g=>{const m=g.reduce((a,i)=>a+G.f[i],0);if(m>=5&&m<=10)c[m]=(c[m]||0)+1;});Object.keys(c).forEach(m=>{d[m]=Math.min(H[m],p.goats[m]+c[m]);});return{c,d};}
+const canWild=i=>!!(G.s&&G.s.dice&&G.s.dice[i]===1&&G.s.dice.filter(x=>x===1).length>=2);
+const allowFace=(i,v)=>v===1||G.s.dice.some((d,j)=>j!==i&&d===1&&G.f[j]===1);
+const selSum=()=>G.sel.reduce((a,i)=>a+G.f[i],0);
+
+/* ===== ONLINE (WebRTC, host-authoritative) ===== */
+function enc(o){return'MG1.'+btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
+function dec(s){s=String(s||'').replace(/\s+/g,'');if(!s)throw new Error('กรุณาวางรหัสก่อน');if(s.length>60000)throw new Error('รหัสยาวผิดปกติ');
+  if(s.indexOf('MG1.')!==0)throw new Error('รูปแบบรหัสไม่ถูกต้อง — ต้องขึ้นต้นด้วย MG1. และคัดลอกให้ครบ');
+  let o;try{o=JSON.parse(decodeURIComponent(escape(atob(s.slice(4)))));}catch(e){throw new Error('รหัสเสียหายหรือคัดลอกมาไม่ครบ');}
+  if(!o||o.p!==1)throw new Error('เวอร์ชันเกมไม่ตรงกัน');if(o.k!=='offer'&&o.k!=='answer')throw new Error('ชนิดรหัสไม่ถูกต้อง');
+  if(typeof o.room!=='string'||!/^[A-Z0-9]{6}$/.test(o.room))throw new Error('รหัสห้องไม่ถูกต้อง');if(!Number.isInteger(o.slot)||o.slot<1||o.slot>MAXP-1)throw new Error('ที่นั่งไม่ถูกต้อง');
+  if(typeof o.sdp!=='string'||o.sdp.indexOf('v=0')!==0||o.sdp.length>40000)throw new Error('ข้อมูลการเชื่อมต่อไม่ถูกต้อง');return o;}
+function iceDone(pc){return new Promise(r=>{if(pc.iceGatheringState==='complete')return r();const t=setTimeout(r,5000);const h=()=>{if(pc.iceGatheringState==='complete'){clearTimeout(t);pc.removeEventListener('icegatheringstatechange',h);r();}};pc.addEventListener('icegatheringstatechange',h);});}
+function mkConn(h){const c={pc:new RTCPeerConnection({iceServers:CFG.stun?[{urls:'stun:stun.l.google.com:19302'}]:[]}),dc:null,status:'waiting',last:Date.now(),h:h,closed:false,to:0};
+  c.set=st=>{if(c.closed||c.status===st)return;c.status=st;if(c.h.status)c.h.status(st);};
+  c.pc.onconnectionstatechange=()=>{const st=c.pc.connectionState;if(st==='failed')c.set('failed');else if(st==='disconnected'&&c.status==='connected')c.set('disconnected');else if(st==='connected'&&c.dc&&c.dc.readyState==='open')c.set('connected');};
+  c.bind=dc=>{c.dc=dc;dc.onopen=()=>{clearTimeout(c.to);c.last=Date.now();c.set('connected');if(c.h.open)c.h.open();};dc.onclose=()=>{if(!c.closed)c.set('disconnected');};
+    dc.onmessage=e=>{if(typeof e.data!=='string'||e.data.length>300000)return;let m;try{m=JSON.parse(e.data);}catch(x){return;}if(!m||m.v!==1||typeof m.t!=='string')return;
+      c.last=Date.now();if(c.status==='disconnected')c.set('connected');try{if(c.h.msg)c.h.msg(m);}catch(x){console.error(x);}};};
+  c.send=o=>{if(c.dc&&c.dc.readyState==='open'){try{c.dc.send(JSON.stringify(Object.assign({v:1},o)));return true;}catch(e){}}return false;};
+  c.arm=ms=>{clearTimeout(c.to);c.to=setTimeout(()=>{if(c.status!=='connected')c.set('failed');},ms);};
+  c.close=()=>{c.closed=true;clearTimeout(c.to);try{if(c.dc)c.dc.close();}catch(e){}try{c.pc.close();}catch(e){}};return c;}
+function closeConn(c,bye,reason){if(!c)return;c.h={};if(bye)c.send({t:'bye',reason:reason||''});setTimeout(()=>c.close(),bye?200:0);}
+function teardown(bye){NET.seats.forEach(s=>{if(s.conn)closeConn(s.conn,bye);});if(NET.conn)closeConn(NET.conn,bye);clearInterval(NET.beat);
+  Object.assign(NET,{role:null,room:'',seats:[],slot:0,conn:null,lobby:null,started:false,hostClosed:false,answer:'',beat:0,busy:false});}
+function startBeat(){clearInterval(NET.beat);NET.beat=setInterval(()=>{const cs=NET.role==='host'?NET.seats.map(s=>s.conn).filter(Boolean):(NET.conn?[NET.conn]:[]);
+  cs.forEach(c=>{if(c.dc&&c.dc.readyState==='open')c.send({t:'ping'});if(c.status==='connected'&&Date.now()-c.last>15000)c.set('disconnected');});},4000);}
+const gStatus=()=>NET.conn?NET.conn.status:'disconnected';
+const sStatus=slot=>{const s=NET.seats[slot];return s&&s.conn?s.status:'disconnected';};
+function hostCreate(){teardown(false);const name=cleanName(G.form.hn,'โฮสต์'),n=Math.min(MAXP,Math.max(2,+G.form.hc||2));CFG.name=name;saveCfg();
+  Object.assign(NET,{role:'host',room:rid(),name,n,seats:[]});for(let i=0;i<n;i++)NET.seats.push(i===0?{slot:0,kind:'host',name,status:'connected'}:{slot:i,kind:'open',name:'',status:'idle',conn:null,code:'',err:'',diff:'normal',busy:false});
+  startBeat();render();}
+async function invite(v){const st=NET.seats[+v];if(!st||st.busy||st.kind==='host')return;if(typeof RTCPeerConnection!=='function'){toast('หน้าต่างนี้ไม่รองรับ WebRTC','err');return;}
+  if(st.conn)closeConn(st.conn,false);st.conn=null;st.busy=true;st.err='';st.code='';G.form['ans'+st.slot]='';if(st.kind==='bot'&&!NET.started)st.kind='open';st.status='waiting';render();
+  const slot=st.slot;try{const c=mkConn({status:x=>hostStatus(slot,x),msg:m=>hostMsg(slot,m)});st.conn=c;c.bind(c.pc.createDataChannel('mg',{ordered:true}));
+    await c.pc.setLocalDescription(await c.pc.createOffer());await iceDone(c.pc);if(st.conn===c)st.code=enc({p:1,k:'offer',room:NET.room,slot,host:NET.name,sdp:c.pc.localDescription.sdp});}
+  catch(e){st.err='สร้างคำเชิญไม่สำเร็จ — ลองอีกครั้ง';st.status='failed';}st.busy=false;render();}
+async function accept(v){const st=NET.seats[+v];if(!st||!st.conn)return;let o;try{o=dec(G.form['ans'+st.slot]);}catch(e){st.err=e.message;return render();}
+  if(o.k!=='answer'){st.err='นี่เป็นรหัสเชิญ ไม่ใช่รหัสตอบกลับ';return render();}if(o.room!==NET.room){st.err='รหัสนี้มาจากห้องอื่น';return render();}
+  if(o.slot!==st.slot){st.err='รหัสนี้เป็นของที่นั่ง '+(o.slot+1);return render();}
+  if(st.conn.pc.signalingState!=='have-local-offer'){st.err='คำเชิญนี้ใช้ไปแล้ว — กดสร้างคำเชิญใหม่';return render();}
+  try{st.conn.set('connecting');await st.conn.pc.setRemoteDescription({type:'answer',sdp:o.sdp});st.conn.arm(CFG.timeout*1000);st.err='';}catch(e){st.err='รหัสตอบกลับใช้ไม่ได้ — สร้างคำเชิญใหม่แล้วลองอีกครั้ง';}render();}
+function hostStatus(slot,x){const st=NET.seats[slot];if(!st)return;const prev=st.status;st.status=x;if(x==='connected'){st.code='';st.err='';}
+  if((x==='disconnected'||x==='failed')&&prev==='connected')toast((st.name||'ที่นั่ง '+(slot+1))+' ขาดการเชื่อมต่อ','warn');
+  if(x==='failed'&&prev!=='connected')st.err='เชื่อมต่อไม่สำเร็จในเวลาที่กำหนด — เครือข่ายอาจต้องใช้ TURN relay ลองสร้างคำเชิญใหม่ หรือใช้ Wi-Fi เดียวกัน';lobbyCast();render();}
+function hostMsg(slot,m){const st=NET.seats[slot];if(!st||!st.conn)return;
+  if(m.t==='hello'){st.name=cleanName(m.name,'ผู้เล่น '+(slot+1));st.kind='human';st.conn.send({t:'welcome',slot,room:NET.room});
+    if(NET.started&&G.s){const i=G.s.players.findIndex(p=>p.seat===slot);if(i>=0&&G.s.players[i].kind==='bot')mutate(s=>{s.players[i].kind='human';s.players[i].diff=null;});
+      st.conn.send({t:'state',s:G.s,ev:[]});toast((i>=0?G.s.players[i].name:st.name)+' กลับมาเชื่อมต่อแล้ว','good');}else toast(st.name+' เข้าห้องแล้ว','good');lobbyCast();render();}
+  else if(m.t==='act')hostAct(slot,m);else if(m.t==='ping')st.conn.send({t:'pong'});else if(m.t==='bye')st.conn.set('disconnected');}
+function hostAct(slot,m){const c=NET.seats[slot].conn,s=G.s;const no=t=>{c.send({t:'err',msg:t});if(G.s)c.send({t:'state',s:G.s,ev:[]});};
+  if(!NET.started||!s||G.mode!=='host')return no('เกมยังไม่เริ่ม');const a=m.a;if(!a||typeof a!=='object'||(a.type!=='roll'&&a.type!=='commit')||!Number.isInteger(m.seq))return no('คำสั่งไม่ถูกต้อง');
+  if(m.seq!==s.seq)return no('สถานะเกมเปลี่ยนไปแล้ว — ซิงก์กระดานใหม่ให้แล้ว');const who=s.players.findIndex(p=>p.seat===slot);
+  if(who<0||s.players[who].kind!=='human')return no('ที่นั่งนี้ไม่ได้ควบคุมโดยผู้เล่น');
+  const r=E.apply(s,{type:a.type,faces:a.faces,groups:a.groups},who);if(r.e)return no(r.e);setState(r.s,r.ev);hostBroadcast(r.ev);}
+function mutate(fn){if(G.mode!=='host'||!G.s)return;const s=clone(G.s);fn(s);s.seq++;if(!E.valid(s))return;setState(s,[]);hostBroadcast([]);}
+function hostBroadcast(ev){if(NET.role!=='host'||!G.s)return;NET.seats.forEach(st=>{if(st.conn&&st.status==='connected'&&st.kind==='human')st.conn.send({t:'state',s:G.s,ev:ev||[]});});}
+function lobbyCast(){if(NET.role!=='host')return;const l={seats:NET.seats.map(st=>({slot:st.slot,name:st.kind==='host'?NET.name:st.kind==='bot'?BOTN[st.slot]+' (บอท)':st.name,kind:st.kind,status:st.kind==='host'?'connected':st.kind==='bot'?'bot':st.status}))};
+  NET.seats.forEach(st=>{if(st.conn&&st.status==='connected'&&st.kind==='human')st.conn.send({t:'lobby',l});});}
+const ready=()=>NET.seats.every(st=>st.kind==='host'||st.kind==='bot'||(st.kind==='human'&&st.status==='connected'));
+function hostStart(){if(NET.role!=='host'||NET.started)return;if(!ready()){toast('ยังมีที่นั่งที่ไม่พร้อม — เชิญผู้เล่นหรือใส่บอท','warn');return;}
+  const ps=NET.seats.map(st=>st.kind==='host'?{name:NET.name,kind:'human',seat:0}:st.kind==='bot'?{name:BOTN[st.slot],kind:'bot',diff:st.diff,seat:st.slot}:{name:st.name,kind:'human',seat:st.slot});
+  NET.started=true;G.gameCfg={ps};begin('host',ps,rnd(ps.length));hostBroadcast([]);}
+function setBot(v){const st=NET.seats[+v];if(!st||st.kind==='host')return;closeConn(st.conn,true,'seat');st.conn=null;Object.assign(st,{code:'',err:'',status:'idle',kind:'bot'});
+  if(NET.started&&G.s){const i=G.s.players.findIndex(p=>p.seat===st.slot);if(i>=0&&G.s.players[i].kind!=='bot')mutate(s=>{s.players[i].kind='bot';s.players[i].diff=st.diff||'normal';});}lobbyCast();render();}
+function guestH(){return{status:x=>{if(x==='connected'){toast('เชื่อมต่อกับโฮสต์แล้ว','good');G.form.jerr='';}if(x==='failed'){G.form.jerr='เชื่อมต่อไม่สำเร็จ: 1) ตรวจว่าโฮสต์วางรหัสตอบกลับแล้วกด “เชื่อมต่อ” 2) ขอรหัสเชิญใหม่ (ใช้ได้ครั้งเดียว) 3) ลองใช้ Wi-Fi เดียวกันหรือปิด VPN 4) บางเครือข่ายต้องใช้ TURN relay ซึ่งเกมนี้ไม่มี — ถ้ายังไม่ได้ ให้เล่นกับบอทหรือในเครื่องเดียวแทน';toast('เชื่อมต่อไม่สำเร็จ','err');}
+    if(x==='disconnected')toast('ขาดการเชื่อมต่อกับโฮสต์','warn');if(x==='connected'&&G.modal&&G.modal.type==='rejoin')G.modal=null;render();},
+  open:()=>{if(NET.conn)NET.conn.send({t:'hello',name:NET.name});},msg:guestMsg};}
+async function mkAnswer(o){const c=mkConn(guestH());NET.conn=c;c.pc.ondatachannel=e=>c.bind(e.channel);await c.pc.setRemoteDescription({type:'offer',sdp:o.sdp});
+  await c.pc.setLocalDescription(await c.pc.createAnswer());await iceDone(c.pc);c.set('connecting');c.arm(180000);return enc({p:1,k:'answer',room:o.room,slot:o.slot,sdp:c.pc.localDescription.sdp});}
+async function join(){const f=G.form;f.jerr='';if(typeof RTCPeerConnection!=='function'){f.jerr='หน้าต่างนี้ไม่รองรับ WebRTC';return render();}
+  let o;try{o=dec(f.inv);}catch(e){f.jerr=e.message;return render();}if(o.k!=='offer'){f.jerr='นี่เป็นรหัสตอบกลับ ไม่ใช่รหัสเชิญจากโฮสต์';return render();}
+  teardown(false);Object.assign(NET,{role:'guest',room:o.room,slot:o.slot,hostName:cleanName(o.host,'โฮสต์'),name:cleanName(f.jn,'ผู้เล่น'),busy:true});CFG.name=NET.name;saveCfg();render();
+  try{NET.answer=await mkAnswer(o);startBeat();}catch(e){teardown(false);f.jerr='สร้างรหัสตอบกลับไม่สำเร็จ — รหัสเชิญอาจหมดอายุ';}NET.busy=false;render();}
+async function rejoinGo(){const f=G.form;f.rjerr='';let o;try{o=dec(f.rj);}catch(e){f.rjerr=e.message;return render();}
+  if(o.k!=='offer'){f.rjerr='นี่ไม่ใช่รหัสเชิญ';return render();}if(o.room!==NET.room){f.rjerr='รหัสนี้เป็นของห้องอื่น';return render();}if(o.slot!==NET.slot){f.rjerr='รหัสนี้เป็นของที่นั่ง '+(o.slot+1)+' ไม่ใช่ของคุณ';return render();}
+  if(NET.conn)closeConn(NET.conn,false);NET.hostClosed=false;try{f.rjout=await mkAnswer(o);}catch(e){f.rjerr='สร้างรหัสตอบกลับไม่สำเร็จ';}render();}
+const EVK=['roll','move','summit','token','empty','knock','bonus','endTrig','over'];
+function guestMsg(m){
+  if(m.t==='lobby'){const l=m.l;NET.lobby=l&&Array.isArray(l.seats)?l.seats.slice(0,MAXP).filter(x=>x&&Number.isInteger(x.slot)&&x.slot>=0&&x.slot<MAXP).map(x=>({slot:x.slot,name:cleanName(x.name,'ที่นั่งว่าง'),kind:String(x.kind),status:STAT[x.status]?x.status:(x.status==='bot'?'bot':'idle')})):null;render();}
+  else if(m.t==='state'){const s=m.s;if(!E.valid(s)){toast('ได้รับข้อมูลเกมที่ไม่ถูกต้องจากโฮสต์ — ไม่นำมาใช้','err');return;}if(!s.players.some(p=>p.seat===NET.slot))return;
+    if(G.mode==='guest'&&G.s&&G.s.id===s.id&&s.seq<G.s.seq)return;G.pending=false;NET.started=true;const n=s.players.length,BL=BONL(n),okP=v=>v===undefined||(Number.isInteger(v)&&v>=0&&v<n);
+    const ev=Array.isArray(m.ev)?m.ev.slice(0,60).filter(e=>e&&EVK.indexOf(e.k)>=0&&(e.m===undefined||MT.indexOf(e.m)>=0)&&okP(e.p)&&okP(e.v)&&(e.b===undefined||BL.indexOf(e.b)>=0)).map(e=>({k:e.k,m:e.m,p:e.p,v:e.v,b:e.b,to:Number.isInteger(e.to)?e.to:0})):[];
+    if(G.mode!=='guest'){stopTimers();G.mode='guest';G.screen='game';G.s=null;G.modal=null;G.lastCur='';}setState(s,ev);}
+  else if(m.t==='err'){G.pending=false;toast(String(m.msg||'คำสั่งไม่ถูกต้อง').slice(0,140),'err');render();}
+  else if(m.t==='bye'){NET.hostClosed=m.reason!=='seat';toast(m.reason==='seat'?'โฮสต์ให้บอทเล่นแทนคุณ — ขอรหัสเชิญใหม่เพื่อกลับมา':'โฮสต์ปิดห้องแล้ว','warn');const c=NET.conn;NET.conn=null;closeConn(c,false);render();}
+  else if(m.t==='ping'){if(NET.conn)NET.conn.send({t:'pong'});}}
+function diag(){const L=['protocol=1','webrtc='+(typeof RTCPeerConnection==='function'?'yes':'no'),'storage='+(LS?'yes':'no'),'role='+(NET.role||'-'),'room='+(NET.room||'-'),'stun='+(CFG.stun?'stun.l.google.com:19302':'off'),'turn=(none)','timeout='+CFG.timeout+'s'];
+  NET.seats.forEach(s=>{if(s.conn)L.push('seat'+(s.slot+1)+': '+s.status+' / '+s.conn.pc.connectionState+' / ice='+s.conn.pc.iceConnectionState);});
+  if(NET.conn)L.push('host-link: '+NET.conn.status+' / '+NET.conn.pc.connectionState+' / ice='+NET.conn.pc.iceConnectionState);return L.join('\n');}
+
+/* ===== VIEWS ===== */
+function vMenu(){const sv=load('game',null),has=!!(sv&&sv.s&&E.valid(sv.s)&&!sv.s.over&&(sv.mode==='bots'||sv.mode==='local'));
+  return'<section class="menu"><svg class="hero-art" viewBox="0 0 360 210" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9a6d6"/><stop offset=".45" stop-color="#5a4778"/><stop offset="1" stop-color="#1f1433"/></linearGradient></defs>'+
+  '<circle cx="290" cy="58" r="36" fill="#ff7a2f" opacity=".95"/><path d="M6 210 118 78l50 50 48-82 138 164z" fill="url(#hg)"/><path d="M216 46 286 210H200z" fill="#000" opacity=".12"/><path d="M216 46l26 34-13-5-11 13-13-14-11 8zM118 78l19 22-10-4-10 8-9-12z" fill="#efe6cc"/>'+
+  '<use href="#flag" x="224" y="8" width="18" height="24" style="color:#f06a35"/><use href="#gt" x="182" y="2" width="48" height="44" style="color:#e4572e"/><use href="#gt" x="94" y="42" width="38" height="35" style="color:#2e86de"/>'+
+  '<use href="#gt" x="254" y="118" width="36" height="33" style="color:#f2b134"/><use href="#gt" x="146" y="142" width="36" height="33" style="color:#8e5bd6"/><use href="#gt" x="56" y="166" width="32" height="29" style="color:#22a06b"/></svg>'+
+  '<h1 class="title">แพะภูเขา</h1><p class="sub">MOUNTAIN GOATS</p><p class="tag">ทอยลูกเต๋า จัดกลุ่มให้ลงตัว พาแพะพิชิตยอดเขา แล้วยึดยอดไว้ให้นานที่สุด · เล่นได้ 2–8 คน</p>'+
+  '<button type="button" class="btn pri play" data-a="go" data-v="bots">'+ic('play')+'เริ่มเล่น</button><div class="row c">'+(has?'<button type="button" class="btn ghost sm" data-a="resume">เล่นต่อเกมที่ค้างไว้</button>':'')+
+  '<button type="button" class="btn ghost sm" data-a="tut">วิธีเล่น</button><button type="button" class="btn ghost sm" data-a="rules">กติกา</button><button type="button" class="btn ghost sm" data-a="settings">ตั้งค่า</button></div>'+
+  '<div class="modes"><button type="button" class="mode" data-a="go" data-v="bots"><span class="mi" style="--c:var(--m7)">'+ic('bot')+'</span><span><b>เล่นกับบอท</b><small>2–8 ผู้เล่น บอท 3 ระดับความยาก</small></span></button>'+
+  '<button type="button" class="mode" data-a="go" data-v="local"><span class="mi" style="--c:var(--m5)">'+ic('users')+'</span><span><b>หลายคนในเครื่องเดียว</b><small>2–8 คน ผลัดกันเล่นบนอุปกรณ์เดียว</small></span></button>'+
+  '<button type="button" class="mode" data-a="go" data-v="online"><span class="mi" style="--c:var(--m9)">'+ic('globe')+'</span><span><b>ออนไลน์ (P2P)</b><small>2–8 คน เชื่อมต่อตรงผ่าน WebRTC</small></span></button></div>'+
+  (STATS.played?'<p class="stats">สถิติ: เล่น '+STATS.played+' เกม · ชนะ '+STATS.wins+' · คะแนนสูงสุด '+STATS.best+'</p>':'')+'</section>';}
+const back='<button type="button" class="ib" data-a="go" data-v="menu" aria-label="กลับเมนู">'+ic('back')+'</button>';
+const extNote=n=>n>4?'<small class="mut">'+n+' ผู้เล่น · ใช้กติกาขยาย: เหรียญ '+MT.map(m=>TOK(n)[m]).join('/')+' และโบนัส '+BONL(n).length+' แผ่น</small>':'<small class="mut">'+n+' ผู้เล่น · กติกาตามเกมต้นฉบับ</small>';
+function vBots(){const f=G.form,n=1+ +f.bots;return'<section class="setup"><div class="head">'+back+'<h1>เล่นกับบอท</h1></div><div class="card">'+
+  '<label class="fld"><span>ชื่อของคุณ</span><input class="inp" id="f-name" data-k="name" maxlength="16" placeholder="คุณ" value="'+esc(f.name)+'"></label>'+
+  '<div class="fld"><span>จำนวนบอทคู่แข่ง</span><div class="row">'+['1','2','3','4','5','6','7'].map(v=>chip('bots',v,v+' บอท')).join('')+'</div>'+extNote(n)+'</div>'+
+  '<div class="fld"><span>ระดับความยาก</span><div class="row">'+['easy','normal','hard'].map(v=>chip('diff',v,DIFF[v])).join('')+'</div><small class="mut">'+DIFF_D[f.diff]+'</small></div>'+
+  '<div class="fld"><span>สีแพะของคุณ</span><div class="row">'+COL.map((c,i)=>chip('color',String(i),'<span class="sw" style="background:'+c+'"></span>'+COLN[i])).join('')+'</div></div>'+
+  '<div class="fld"><span>ใครเริ่มก่อน</span><div class="row">'+chip('first','random','สุ่ม')+chip('first','me','ฉันเริ่มก่อน')+'</div></div>'+
+  '<button type="button" class="btn pri wide big" data-a="startBots">'+ic('play')+'เริ่มเกม</button></div></section>';}
+function vLocal(){const n=+G.form.lc;let names='';for(let i=0;i<n;i++)names+='<div class="row"><span class="sw" style="background:'+COL[i]+';width:22px;height:22px"></span><input class="inp" id="f-ln'+i+'" data-k="ln'+i+'" maxlength="16" placeholder="ผู้เล่น '+(i+1)+'" value="'+esc(G.form['ln'+i])+'" aria-label="ชื่อผู้เล่น '+(i+1)+'"></div>';
+  return'<section class="setup"><div class="head">'+back+'<h1>หลายคนในเครื่องเดียว</h1></div><div class="card">'+
+  '<div class="fld"><span>จำนวนผู้เล่น</span><div class="row">'+['2','3','4','5','6','7','8'].map(v=>chip('lc',v,v+' คน')).join('')+'</div>'+extNote(n)+'</div><div class="fld"><span>ชื่อผู้เล่น</span><div class="names">'+names+'</div></div>'+
+  tog('hand','แสดงหน้าส่งต่อเครื่องเมื่อเปลี่ยนตา')+'<p class="mut" style="margin:6px 0 12px">เกมนี้ไม่มีข้อมูลลับ หน้าส่งต่อเครื่องช่วยให้รู้ชัดว่าถึงตาใคร</p>'+
+  '<button type="button" class="btn pri wide big" data-a="startLocal">'+ic('play')+'เริ่มเกม</button></div></section>';}
+function seatsHTML(){return NET.seats.map(st=>{const isBot=st.kind==='bot'&&!st.code;
+  let h='<div class="seat"><div class="sh"><span class="sw" style="background:'+COL[st.slot]+'"></span><span class="mut">ที่นั่ง '+(st.slot+1)+'</span><b class="sn">'+esc(st.kind==='host'?NET.name+' (คุณ · โฮสต์)':st.kind==='bot'?BOTN[st.slot]+' (บอท)':st.name||'ที่นั่งว่าง')+'</b>'+
+    (st.kind==='host'?pill('connected','โฮสต์'):isBot?pill('bot','บอท · '+DIFF[st.diff]):pill(st.status))+'</div>';
+  if(st.kind!=='host'){h+='<div class="row">';if(st.kind==='bot'&&!NET.started)h+=['easy','normal','hard'].map(d=>'<button type="button" class="chip '+(st.diff===d?'on':'')+'" data-a="sdiff" data-v="'+st.slot+':'+d+'">บอท'+DIFF[d]+'</button>').join('');
+    h+='<button type="button" class="btn sm" data-a="invite" data-v="'+st.slot+'" '+(st.busy?'disabled':'')+'>'+(st.busy?'กำลังสร้าง…':st.kind==='bot'?'เชิญผู้เล่นแทนบอท':(st.code||st.status!=='idle')?'สร้างคำเชิญใหม่':'สร้างคำเชิญ')+'</button>';
+    if(st.kind!=='bot')h+='<button type="button" class="btn sm soft" data-a="setBot" data-v="'+st.slot+'">'+(NET.started?'ให้บอทเล่นแทน':'ใส่บอท')+'</button>';h+='</div>';
+    if(st.code&&st.status!=='connected')h+='<div class="step"><b>ขั้นที่ 1 · ส่งรหัสเชิญนี้ให้เพื่อน</b><textarea class="code" id="inv'+st.slot+'" rows="3" readonly>'+esc(st.code)+'</textarea><div><button type="button" class="btn sm" data-a="copy" data-v="inv'+st.slot+'">คัดลอกรหัสเชิญ</button></div></div>'+
+      '<div class="step"><b>ขั้นที่ 2 · วางรหัสตอบกลับจากเพื่อน แล้วกดเชื่อมต่อ</b><textarea class="code" id="ans'+st.slot+'" data-k="ans'+st.slot+'" rows="3" placeholder="MG1.…">'+esc(G.form['ans'+st.slot]||'')+'</textarea><div><button type="button" class="btn sm grn" data-a="accept" data-v="'+st.slot+'" '+(st.status==='connecting'?'disabled':'')+'>'+(st.status==='connecting'?'กำลังเชื่อมต่อ…':'เชื่อมต่อ')+'</button></div></div>';
+    if(st.err)h+='<p class="err">'+esc(st.err)+'</p>';}
+  return h+'</div>';}).join('');}
+function vOnline(){const sup=typeof RTCPeerConnection==='function',f=G.form;
+  let h='<section class="setup"><div class="head"><button type="button" class="ib" data-a="leaveOnline" aria-label="กลับเมนู">'+ic('back')+'</button><h1>ออนไลน์ (P2P)</h1></div><div class="card">';
+  if(!sup)h+='<p class="note">หน้าต่างหรือเบราว์เซอร์นี้ไม่รองรับ WebRTC จึงเล่นออนไลน์ไม่ได้ — เปิดไฟล์ด้วย Chrome, Edge, Firefox หรือ Safari หรือเล่นกับบอท/ในเครื่องเดียวแทน</p>';
+  h+='<p class="note info">เชื่อมต่อเครื่องถึงเครื่องโดยตรง ไม่มีเซิร์ฟเวอร์กลาง จึงต้อง<b>คัดลอกรหัสส่งหากันเอง</b> (เช่น ทางแชต) เกมใช้ STUN สาธารณะช่วยหาเส้นทาง แต่<b>บางเครือข่าย (4G/5G บางค่าย เครือข่ายองค์กร) ต้องใช้ TURN relay ซึ่งเกมนี้ไม่มี</b> จึงไม่รับประกันว่าจะเชื่อมต่อได้เสมอ</p>';
+  if(!NET.role){h+='<div class="tabs"><button type="button" class="'+(f.tab==='host'?'on':'')+'" data-a="form" data-v="tab:host">สร้างห้อง (โฮสต์)</button><button type="button" class="'+(f.tab==='join'?'on':'')+'" data-a="form" data-v="tab:join">เข้าร่วมห้อง</button></div>';
+    if(f.tab==='host')h+='<ol class="mut"><li>สร้างห้อง แล้วกด “สร้างคำเชิญ” ให้แต่ละที่นั่ง</li><li>ส่งรหัสเชิญให้เพื่อน เพื่อนจะได้ “รหัสตอบกลับ” ส่งกลับมา</li><li>วางรหัสตอบกลับแล้วกด “เชื่อมต่อ”</li><li>ทุกที่นั่งพร้อม (หรือใส่บอท) แล้วกด “เริ่มเกม”</li></ol>'+
+      '<label class="fld"><span>ชื่อของคุณ</span><input class="inp" id="f-hn" data-k="hn" maxlength="16" placeholder="โฮสต์" value="'+esc(f.hn)+'"></label><div class="fld"><span>จำนวนผู้เล่นทั้งหมด</span><div class="row">'+['2','3','4','5','6','7','8'].map(v=>chip('hc',v,v+' คน')).join('')+'</div>'+extNote(+f.hc)+'</div>'+
+      '<button type="button" class="btn pri wide" data-a="hostCreate" '+(sup?'':'disabled')+'>สร้างห้อง</button>';
+    else h+='<ol class="mut"><li>ขอ “รหัสเชิญ” (ขึ้นต้นด้วย MG1.) จากโฮสต์ แล้ววางด้านล่าง</li><li>กด “สร้างรหัสตอบกลับ” แล้วคัดลอกส่งให้โฮสต์</li><li>รอโฮสต์วางรหัส สถานะจะเปลี่ยนเป็น “เชื่อมต่อแล้ว”</li><li>ถ้าหลุด ขอรหัสเชิญใหม่ คุณจะกลับมาที่นั่งเดิม</li></ol>'+
+      '<label class="fld"><span>ชื่อของคุณ</span><input class="inp" id="f-jn" data-k="jn" maxlength="16" placeholder="ผู้เล่น" value="'+esc(f.jn)+'"></label><label class="fld"><span>รหัสเชิญจากโฮสต์</span><textarea class="code" id="f-inv" data-k="inv" rows="4" placeholder="MG1.…">'+esc(f.inv)+'</textarea></label>'+
+      '<button type="button" class="btn pri wide" data-a="join" '+(sup?'':'disabled')+'>สร้างรหัสตอบกลับ</button>'+(f.jerr?'<p class="err">'+esc(f.jerr)+'</p>':'');}
+  else if(NET.role==='host'){const r=ready();h+='<p>ห้อง <span class="room">'+NET.room+'</span></p><p class="mut">'+(r?'ทุกที่นั่งพร้อมแล้ว กด “เริ่มเกม” ได้เลย':'ผู้เล่นทุกคนเชื่อมต่อผ่านคุณ — เปิดหน้านี้ค้างไว้ตลอดเกม')+'</p>'+seatsHTML()+
+    '<div class="ma"><button type="button" class="btn dng" data-a="closeRoom">ปิดห้อง</button><button type="button" class="btn pri" data-a="hostStart" '+(r?'':'disabled')+'>เริ่มเกม</button></div>';}
+  else{h+='<p>ห้อง <span class="room">'+esc(NET.room)+'</span> · ที่นั่งของคุณ: '+(NET.slot+1)+' · โฮสต์: '+esc(NET.hostName)+'</p><p>สถานะ: '+pill(NET.busy?'connecting':gStatus(),NET.busy?'กำลังสร้างรหัส…':null)+'</p>';
+    if(NET.answer&&gStatus()!=='connected')h+='<div class="step"><b>รหัสตอบกลับ — คัดลอกส่งให้โฮสต์</b><textarea class="code" id="ansOut" rows="4" readonly>'+esc(NET.answer)+'</textarea><div><button type="button" class="btn sm" data-a="copy" data-v="ansOut">คัดลอกรหัสตอบกลับ</button></div></div>';
+    if(f.jerr)h+='<p class="err">'+esc(f.jerr)+'</p>';
+    if(NET.lobby)h+=NET.lobby.map(x=>'<div class="seat"><div class="sh" style="margin:0"><span class="sw" style="background:'+COL[x.slot]+'"></span><b class="sn">'+esc(x.name)+(x.slot===NET.slot?' (คุณ)':'')+'</b>'+pill(x.kind==='host'?'connected':x.kind==='bot'?'bot':x.status,x.kind==='host'?'โฮสต์':x.kind==='bot'?'บอท':null)+'</div></div>').join('');
+    if(gStatus()==='connected')h+='<p class="mut">เชื่อมต่อแล้ว รอโฮสต์เริ่มเกม…</p>';h+='<button type="button" class="btn dng" data-a="leaveRoom">ออกจากห้อง</button>';}
+  return h+'<details class="adv"><summary>ข้อมูลเชิงเทคนิค (ขั้นสูง)</summary><pre>'+esc(diag())+'</pre></details></div></section>';}
+function badge(p,i){if(isNet()){const a=[];if(i===G.me)a.push('คุณ');if(p.seat===0)a.push('โฮสต์');if(p.kind==='bot')a.push('บอท·'+DIFF[p.diff]);return a.join(' · ')||'ออนไลน์';}
+  return p.kind==='bot'?'บอท · '+DIFF[p.diff]:G.mode==='bots'?'คุณ':'ผู้เล่น '+(i+1);}
+function hint(my){const s=G.s,cur=s.players[s.cur];if(s.over)return'กดดูผลการแข่งขันได้เลย';if(!my)return cur.kind==='bot'?'บอทกำลังเล่น ดูเหตุผลของบอทได้ในช่องด้านล่าง':(isNet()?'รอ '+cur.name+' เดิน…':'');
+  if(G.pending)return'กำลังส่งคำสั่งไปยังโฮสต์…';if(G.hand)return'รอผู้เล่นรับเครื่อง';if(G.rolling)return'กำลังทอย…';if(s.phase==='roll')return'กด “ทอยลูกเต๋า” เพื่อเริ่มตา (ทางลัด R)';
+  if(G.wild>=0)return'เลือกค่าใหม่ให้ลูกเต๋าหน้า 1 ที่เกินมา';if(G.sel.length){const n=selSum();return n>=5&&n<=10?'ผลรวม '+n+' — กด “รวมกลุ่ม” เพื่อเดินภูเขา '+n:'ผลรวม '+n+' — ต้องรวมได้ 5 ถึง 10';}
+  if(!G.any)return'ไม่มีกลุ่มที่รวมได้ 5–10 — กด “ผ่านตา”';if(!G.g.length)return'แตะลูกเต๋าเพื่อเลือก แล้วรวมกลุ่มให้ได้ 5–10'+(s.dice.filter(x=>x===1).length>=2?' · ได้หน้า 1 หลายลูก กด “เปลี่ยนค่า” ได้':'');
+  return'จัดกลุ่มเพิ่มได้ หรือกด “ยืนยันการเดิน”';}
+function netBanner(){if(G.mode==='guest'&&gStatus()!=='connected')return'<div class="nb">'+(NET.hostClosed?'โฮสต์ปิดห้องแล้ว':'ขาดการเชื่อมต่อกับโฮสต์ ('+STAT[gStatus()]+') <button type="button" class="btn sm" data-a="rejoin">เชื่อมต่อใหม่</button>')+'</div>';
+  if(G.mode==='host'){const lost=G.s.players.filter(p=>p.kind==='human'&&p.seat>0&&sStatus(p.seat)!=='connected');if(lost.length)return'<div class="nb">'+esc(lost.map(p=>p.name).join(', '))+' ขาดการเชื่อมต่อ <button type="button" class="btn sm" data-a="seats">จัดการ</button></div>';}return'';}
+function lastLine(){const L=G.s.log;if(!L.length)return'ยังไม่มีการเดิน — ทอยลูกเต๋าเพื่อเริ่มเกม';const e=L[L.length-1];
+  if(e.sys)return e.sys==='end'?'เงื่อนไขจบเกมครบ — เล่นต่อจนจบรอบนี้':'เกมจบแล้ว';return nm(e.p)+': '+(describe(e.ev)||'ผ่านตา');}
+const SKY='<svg class="sky" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="bsun" cx=".84" cy=".16" r=".38"><stop offset="0" stop-color="#ff8a3c" stop-opacity=".85"/><stop offset=".35" stop-color="#ff4a1f" stop-opacity=".28"/><stop offset="1" stop-color="#ff4a1f" stop-opacity="0"/></radialGradient></defs>'+
+  '<rect width="600" height="400" fill="url(#bsun)"/><g fill="#fff" opacity=".7"><circle cx="40" cy="30" r="1.2"/><circle cx="120" cy="60" r="1"/><circle cx="200" cy="22" r="1.3"/><circle cx="290" cy="54" r="1"/><circle cx="360" cy="26" r="1.2"/><circle cx="430" cy="70" r="1"/><circle cx="70" cy="100" r="1"/><circle cx="250" cy="96" r="1.1"/></g>'+
+  '<circle class="moon" cx="505" cy="64" r="30" fill="#ff7a2f"/><circle cx="496" cy="55" r="5" fill="#d9531a" opacity=".6"/><circle cx="514" cy="74" r="4" fill="#d9531a" opacity=".55"/>'+
+  '<path d="M0 240 60 190 95 215 150 150 205 210 265 170 330 225 400 160 455 215 520 175 600 215V400H0Z" fill="#2a1446" opacity=".85"/><path d="M150 150 164 170 154 166 144 174ZM400 160 414 180 404 176 394 184Z" fill="#cfc4b8" opacity=".45"/>'+
+  '<path d="M0 300 90 250 170 285 250 235 340 290 430 245 520 280 600 255V400H0Z" fill="#1a0c30" opacity=".7"/>'+
+  '<g transform="translate(0 90) scale(.5)" fill="#07030d"><path class="bat" d="M0 0 L-6 -8 Q-14 -11 -25 -2 Q-18 -2 -16 4 Q-10 0 -6 6 L0 3 L6 6 Q10 0 16 4 Q18 -2 25 -2 Q14 -11 6 -8Z"/></g><g transform="translate(0 140) scale(.4)" fill="#07030d"><path class="bat" style="animation-duration:26s;animation-delay:-9s" d="M0 0 L-6 -8 Q-14 -11 -25 -2 Q-18 -2 -16 4 Q-10 0 -6 6 L0 3 L6 6 Q10 0 16 4 Q18 -2 25 -2 Q14 -11 6 -8Z"/></g>'+
+  '<g class="fog"><ellipse cx="120" cy="352" rx="170" ry="22" fill="#b9a6d6" opacity=".14"/><ellipse cx="430" cy="366" rx="190" ry="22" fill="#b9a6d6" opacity=".12"/></g>'+
+  '<path d="M0 372C120 352 240 378 360 360 460 346 540 366 600 356V400H0Z" fill="#0f1a12" opacity=".9"/></svg>';
+function vGame(){const s=G.s,n=s.players.length,cur=s.players[s.cur],my=mine(),can=canAct(),assign=s.phase==='assign'&&!!G.f,plan=planInfo(),BL=BONL(n),taken=BL.length-s.bonus.length;
+  let o='<section class="game"><header class="top"><div class="brand"><span class="logo">'+goat('#fff6e3')+'</span><b>แพะภูเขา</b></div><div class="turn" aria-live="polite">'+
+    (s.over?'<span class="tp">'+ic('crown')+'<span>เกมจบแล้ว</span></span>':'<span class="tp" style="--pc:'+cur.color+'">'+goat(cur.color)+'<span>'+(my&&G.mode!=='local'?'ตาของคุณ':'ตาของ '+esc(cur.name))+'</span></span><span class="rd">รอบ '+s.round+'</span>'+(s.endTrig?'<span class="last">รอบสุดท้าย</span>':''))+
+    '</div><div class="tools"><button type="button" class="ib" data-a="log" aria-label="บันทึกการเล่น" title="บันทึกการเล่น">'+ic('list')+'</button><button type="button" class="ib" data-a="rules" aria-label="กติกา" title="กติกา">'+ic('help')+'</button>'+
+    '<button type="button" class="ib" data-a="cfg" data-v="sound" aria-label="เปิด/ปิดเสียง" title="เสียง">'+ic(CFG.sound?'snd':'mute')+'</button><button type="button" class="ib" data-a="pause" aria-label="พักเกม" title="พักเกม">'+ic('pse')+'</button></div></header>';
+  /* players */
+  o+='<section class="players" aria-label="ผู้เล่นและคะแนน">'+s.players.map((p,i)=>{const a=i===s.cur&&!s.over,sm=E.summits(p),bs=p.bonus.reduce((x,y)=>x+y,0);
+    return'<article class="pc'+(a?' act':'')+'" style="--pc:'+p.color+'" aria-label="'+esc(p.name)+' '+E.score(p)+' คะแนน">'+(a?'<span class="pturn">ตาเดิน</span>':'')+'<div class="pav">'+goat(p.color)+'</div><div class="pinfo"><div class="pname"><b>'+esc(p.name)+'</b><span class="bd">'+esc(badge(p,i))+'</span>'+
+    (G.mode==='host'&&p.kind==='human'&&p.seat>0?'<span class="nd '+sStatus(p.seat)+'" title="'+STAT[sStatus(p.seat)]+'"></span>':'')+'</div><div class="ptk">'+MT.map(m=>'<span class="tk'+(p.tokens[m]?'':' z')+'" style="--cc:var(--m'+m+')" title="เหรียญภูเขา '+m+': '+p.tokens[m]+'">'+p.tokens[m]+'</span>').join('')+
+    (bs?'<span class="bc" title="โบนัสครบชุด '+p.bonus.join(', ')+'">+'+bs+'</span>':'')+'</div></div><div class="psc"><b>'+E.score(p)+'</b><small>'+(sm?'ยอด '+sm+' · ':'')+'คะแนน</small></div></article>';}).join('')+'</section>';
+  /* board */
+  o+='<section class="board" aria-label="ภูเขา 6 ลูก">'+SKY+'<div class="bhead"><span class="lbl">โบนัส</span>'+BL.map((b,i)=>'<span class="hx'+(i<taken?' off':'')+'" title="'+(i<taken?'ถูกรับแล้ว':'ยังเหลือ')+'">'+b+'</span>').join('')+'<span class="sp"></span><span class="lbl">'+n+' ผู้เล่น'+(n>4?' · กติกาขยาย':'')+'</span></div><div class="mts">';
+  MT.forEach(m=>{const hh=H[m],own=s.players.findIndex(p=>p.goats[m]===hh),sup=s.supply[m];
+    o+='<div class="mt'+(sup?'':' dep')+'" style="--mc:var(--m'+m+')'+(own>=0?';--own:'+s.players[own].color:'')+'" role="group" aria-label="ภูเขา '+m+' '+hh+' ช่อง เหรียญเหลือ '+sup+(own>=0?' ยอดเป็นของ '+esc(s.players[own].name):' ยอดว่าง')+'">';
+    o+=(plan&&plan.c[m]?'<span class="pb">+'+plan.c[m]+'</span>':'')+'<div class="rock" style="grid-row:'+(5-hh)+'/6"></div>';
+    for(let pos=hh;pos>=0;pos--){const top=pos===hh,ins=pos?Math.round(pos/4*16):0,here=[];
+      s.players.forEach((p,i)=>{if(p.goats[m]===pos)here.push(gw(p.color,G.fx['g'+i+':'+m]?'hop':'',i+1));});
+      o+='<div class="cell'+(top?' sum':'')+(pos===0?' foot':'')+(plan&&plan.d[m]===pos?' tg':'')+(top&&own>=0?' own':'')+(G.fx[m+':'+pos]?' '+G.fx[m+':'+pos]:'')+'" style="grid-row:'+(5-pos)+';margin-inline:'+ins+'%" title="'+(top?'ยอดเขา '+m:pos===0?'เชิงเขา':'ช่องที่ '+pos)+'">'+
+        here.join('')+(here.length>3?'<span class="cnt">'+here.length+'</span>':'')+(top&&own>=0?'<svg class="flag" aria-hidden="true"><use href="#flag"/></svg>':'')+(top&&G.fx['pt'+m]?'<span class="fl">+'+m+'</span>':'')+'</div>';}
+    o+='<div class="mfoot"><span class="mnum">'+m+'</span><span class="msup">'+coin(m,'xs')+'<span>'+(sup?'×'+sup:'หมด')+'</span></span></div></div>';});
+  o+='</div></section>';
+  /* tray: fixed sections */
+  o+='<section class="tray" aria-label="ลูกเต๋าและการเดิน"><div class="thead"><span class="tav" style="--pc:'+cur.color+'">'+goat(cur.color)+'</span><div class="tt"><b>'+(s.over?'เกมจบแล้ว':my?(G.mode==='local'?'ตาของ '+esc(cur.name):'ตาของคุณ'):'ตาของ '+esc(cur.name))+'</b><small aria-live="polite">'+esc(hint(my))+'</small></div></div>';
+  o+='<div class="dice" role="group" aria-label="ลูกเต๋า 4 ลูก">';
+  for(let i=0;i<4;i++){if(!assign){o+='<div class="dw"><span class="die blank" aria-hidden="true">?</span><span class="gt">&nbsp;</span></div>';continue;}
+    const f=G.f[i],gi=G.g.findIndex(g=>g.indexOf(i)>=0),ch=canWild(i),sel=G.sel.indexOf(i)>=0;
+    o+='<div class="dw">'+dieH(f,(sel?'sel ':'')+(gi>=0?'g'+gi+' ':'')+(ch?'wild ':'')+(G.rolling?'roll':''),'id="die'+i+'" data-a="die" data-v="'+i+'" aria-pressed="'+sel+'" aria-label="ลูกเต๋าลูกที่ '+(i+1)+' ค่า '+f+(gi>=0?' กลุ่ม '+(gi+1):'')+'" '+(can?'':'disabled'))+
+      (gi>=0?'<span class="gt g'+gi+'">กลุ่ม '+(gi+1)+'</span>':ch&&can?'<button type="button" class="wb" data-a="wild" data-v="'+i+'">เปลี่ยนค่า</button>':'<span class="gt">&nbsp;</span>')+'</div>';}
+  o+='</div>';
+  let w=netBanner();
+  if(assign&&G.wild>=0&&can){w+='<div class="wr"><span>ลูกที่ '+(G.wild+1)+' เป็น:</span>';for(let v=1;v<7;v++)w+='<button type="button" class="fb '+(G.f[G.wild]===v?'on':'')+'" data-a="face" data-v="'+v+'" '+(allowFace(G.wild,v)?'':'disabled')+'>'+v+'</button>';w+='<button type="button" class="btn sm soft" data-a="wild" data-v="-1">เสร็จ</button></div>';}
+  if(assign&&G.g.length){w+='<div class="groups">'+G.g.map((g,gi)=>{const t=g.reduce((a,i)=>a+G.f[i],0);return'<span class="gc g'+gi+'">'+g.map(i=>G.f[i]).join('+')+' = <b>'+t+'</b>'+(can?'<button type="button" class="gx" data-a="ungroup" data-v="'+gi+'" aria-label="ยกเลิกกลุ่ม '+(gi+1)+'">×</button>':'')+'</span>';}).join('')+'</div>';
+    const r=E.apply(Object.assign({},s,{log:[]}),{type:'commit',faces:G.f,groups:G.g},s.cur,()=>0);const gain=r.e?0:E.score(r.s.players[s.cur])-E.score(cur);
+    w+='<div class="pv">'+(r.e?'<span class="err">'+esc(r.e)+'</span>':'<b>ผล:</b> '+esc(describe(r.ev)||'ไม่มีการเปลี่ยนแปลง')+(gain>0?' · <b>+'+gain+' คะแนน</b>':''))+'</div>';}
+  if(!s.over&&cur.kind==='bot')w+='<div class="bn"><b>'+esc(cur.name)+':</b> '+esc(G.plan?G.plan.note:G.modal&&G.mode!=='host'?'รอให้ปิดหน้าต่างก่อน':s.phase==='roll'?'กำลังทอยลูกเต๋า…':'กำลังคิด…')+'</div>';
+  if(!w)w='<div class="tip">'+(s.over?'เกมจบแล้ว — ดูสรุปคะแนนได้จากปุ่มด้านล่าง':my&&assign?'กลุ่มที่จัดแล้วและผลที่จะเกิดขึ้นจะแสดงที่นี่':my?'ทอยลูกเต๋าเพื่อเริ่มตาของคุณ':'รอ '+esc(cur.name)+' เล่น…')+'</div>';
+  o+='<div class="work">'+w+'</div><div class="tfoot"><div class="acts">';
+  if(s.over)o+='<button type="button" class="btn pri wide" data-a="showEnd">'+ic('crown')+'ดูผลการแข่งขัน</button>';
+  else if(my&&s.phase==='roll')o+='<button type="button" class="btn pri wide" id="btnRoll" data-a="roll" '+(can?'':'disabled')+'>'+ic('dice')+'ทอยลูกเต๋า</button>';
+  else if(my&&assign){const ss=selSum();o+='<button type="button" class="btn grn" data-a="group" '+(can&&G.sel.length&&ss>=5&&ss<=10?'':'disabled')+'>รวมกลุ่ม</button><button type="button" class="btn soft" data-a="clear" '+(can&&(G.g.length||G.sel.length||G.f.some((x,i)=>x!==s.dice[i]))?'':'disabled')+'>ล้าง</button>'+
+    (CFG.hints?'<button type="button" class="btn soft" data-a="sugg" '+(can?'':'disabled')+'>แนะนำ</button>':'')+'<button type="button" class="btn pri cm" data-a="commit" '+(can?'':'disabled')+'>'+(G.g.length?'ยืนยันการเดิน':'ผ่านตา')+'</button>';}
+  else o+='<button type="button" class="btn soft wide" disabled>'+(G.pending?'กำลังส่งคำสั่ง…':'รอ '+esc(cur.name)+'…')+'</button>';
+  o+='</div><button type="button" class="lastlog" data-a="log">'+ic('list')+'<span>'+esc(lastLine())+'</span></button></div></section></section>';
+  return o;}
+function logH(){const s=G.s;if(!s.log.length)return'<li>ยังไม่มีการเดิน — ทอยลูกเต๋าเพื่อเริ่มเกม</li>';
+  return s.log.slice().reverse().map(e=>{if(e.sys)return'<li class="sys">'+(e.sys==='end'?(e.why==='bonus'?'โบนัสถูกรับหมดแล้ว':'เหรียญหมดแล้ว 3 กอง')+' — เล่นต่อจนจบรอบนี้':'เกมจบแล้ว!')+'</li>';
+    const p=s.players[e.p];const ch=e.f.map((x,i)=>x!==e.d[i]?'1→'+x:'').filter(Boolean);
+    return'<li style="--lc:'+p.color+'"><b>'+esc(p.name)+'</b> ทอย '+e.d.join('·')+(ch.length?' (เปลี่ยน '+ch.join(', ')+')':'')+' · '+(e.sums.length?'กลุ่ม '+e.sums.join(', '):'ผ่านตา')+
+      (describe(e.ev)?'<div>'+esc(describe(e.ev))+'</div>':'')+(e.note?'<div class="why">“'+esc(e.note)+'”</div>':'')+'</li>';}).join('');}
+
+/* ===== MODALS ===== */
+const TUT=[
+  ['เป้าหมายของเกม','พาแพะขึ้นยอดภูเขาหมายเลข 5–10 เพื่อเก็บเหรียญ เหรียญมีค่าเท่ากับเลขภูเขา ใครมีคะแนนรวมสูงสุดเมื่อจบเกมเป็นผู้ชนะ',()=>MT.map(m=>coin(m)).join('')],
+  ['ทอยลูกเต๋า 4 ลูก','ทุกตาเริ่มด้วยการทอยลูกเต๋า 4 ลูก ถ้าได้หน้า 1 หลายลูก เปลี่ยนลูกที่เกินมาเป็นเลขใดก็ได้ แต่ต้องเหลือหน้า 1 อย่างน้อยหนึ่งลูก',()=>dieH(1,'','','span')+dieH(1,'wild','','span')+dieH(4,'','','span')+'<b>→</b>'+dieH(1,'','','span')+dieH(5,'wild','','span')+dieH(4,'','','span')],
+  ['จัดกลุ่มลูกเต๋า','แตะลูกเต๋าเพื่อเลือก แล้วกด “รวมกลุ่ม” กลุ่มที่รวมได้ 5–10 ทำให้แพะบนภูเขาเลขนั้นขึ้น 1 ช่อง เช่น 3+4 และ 1+6 = ภูเขา 7 ขึ้น 2 ช่อง ไม่ต้องใช้ลูกเต๋าครบทุกลูก',()=>dieH(3,'g0','','span')+dieH(4,'g0','','span')+'<b>= 7</b>'+dieH(1,'g1','','span')+dieH(6,'g1','','span')+'<b>= 7</b>'],
+  ['ยึดยอดเขา','ขึ้นถึงยอดแล้วรับเหรียญทันที ยอดเขาอยู่ได้ทีละตัว แพะคู่แข่งที่อยู่บนยอดต้องกลับไปเชิงเขา ถ้าคุณอยู่บนยอดแล้ว ทุกกลุ่มที่ได้เลขนั้นให้เหรียญเพิ่ม 1 เหรียญ',()=>goat('#e4572e')+'<b>ขึ้นยอด</b>'+goat('#2e86de')+'<b>กลับเชิงเขา</b>'],
+  ['โบนัสและการจบเกม','สะสมเหรียญครบทั้ง 6 ภูเขาเพื่อรับโบนัสค่าสูงสุดที่เหลือ เกมจบเมื่อเหรียญหมด 3 กองหรือโบนัสถูกรับหมด แล้วเล่นต่อจนครบรอบ (เล่น 5–8 คน เกมเพิ่มเหรียญและโบนัสให้อัตโนมัติ)',()=>BONL(4).map(b=>'<span class="hx">'+b+'</span>').join('')]];
+function mTut(){const i=G.modal.i,t=TUT[i];return'<p class="mut">ขั้นที่ '+(i+1)+' จาก '+TUT.length+'</p><h2>'+t[0]+'</h2><div class="art">'+t[2]()+'</div><p>'+t[1]+'</p><div class="dots">'+TUT.map((_,k)=>'<i class="'+(k===i?'on':'')+'"></i>').join('')+'</div>'+
+  '<div class="ma"><button type="button" class="btn soft" data-a="mclose">ข้าม</button><button type="button" class="btn" data-a="tutP" '+(i?'':'disabled')+'>ย้อนกลับ</button><button type="button" class="btn pri" data-a="tutN">'+(i===TUT.length-1?'เริ่มเล่นเลย':'ถัดไป')+'</button></div>';}
+function mRules(){return'<h2>กติกาโดยย่อ</h2><h3>เป้าหมาย</h3><p>พาแพะขึ้นยอดภูเขา 5–10 เพื่อเก็บเหรียญ เหรียญมีค่าเท่ากับเลขภูเขา คะแนนรวมสูงสุดชนะ</p>'+
+  '<h3>การเตรียมเกม</h3><ul><li>แต่ละคนมีแพะ 6 ตัว วางที่เชิงเขาทุกลูก</li><li>จำนวนเหรียญและแผ่นโบนัสขึ้นกับจำนวนผู้เล่นตามตารางนี้</li></ul>'+
+  '<div class="tw"><table class="tb"><tr><th class="l">ผู้เล่น</th>'+MT.map(m=>'<th>'+coin(m)+'</th>').join('')+'<th class="l">โบนัสครบชุด</th></tr><tr><td class="l">ช่อง (รวมยอด)</td>'+MT.map(m=>'<td>'+H[m]+'</td>').join('')+'<td></td></tr>'+
+  [2,3,4,5,6,7,8].map(n=>{const t=TOK(n);return'<tr'+(n>4?' class="ext"':'')+'><td class="l">'+n+' คน'+(n>4?' *':'')+'</td>'+MT.map(m=>'<td>'+t[m]+'</td>').join('')+'<td class="l">'+BONL(n).join(' · ')+'</td></tr>';}).join('')+'</table></div>'+
+  '<p class="mut">* 5–8 คนเป็นกติกาขยายของเกมนี้ (เกมต้นฉบับรองรับ 2–4 คน): เหรียญแต่ละกองเพิ่ม 20% ของจำนวนเดิมต่อผู้เล่นที่เกิน 4 คน และแผ่นโบนัสมีเท่าจำนวนผู้เล่น ไล่ค่าจาก 15 ลงถึง 6</p>'+
+  '<h3>ในตาของคุณ</h3><ol><li>ทอยลูกเต๋า 4 ลูก</li><li>ถ้าได้หน้า 1 มากกว่าหนึ่งลูก เปลี่ยนลูกที่เกินมาเป็นเลขใดก็ได้ แต่ต้องเหลือหน้า 1 อย่างน้อยหนึ่งลูก</li><li>จัดกลุ่มลูกเต๋า กลุ่มที่รวมได้ 5–10 ทำให้แพะบนภูเขาเลขนั้นขึ้น 1 ช่อง (ไม่ต้องใช้ลูกเต๋าครบ)</li>'+
+  '<li>ยอดเขาอยู่ได้ทีละตัว ขึ้นถึงยอดแล้วรับเหรียญ 1 เหรียญ และแพะคนอื่นบนยอดกลับเชิงเขา</li><li>ถ้าอยู่บนยอดแล้ว ทุกกลุ่มที่ได้เลขนั้นรับเหรียญเพิ่ม 1 เหรียญ (ถ้ายังมี)</li></ol>'+
+  '<h3>โบนัสครบชุด</h3><p>มีเหรียญครบทั้ง 6 ภูเขาเมื่อไร รับโบนัสค่าสูงสุดที่เหลือ ได้อีกเมื่อครบชุดที่ 2, 3 …</p><h3>จบเกม</h3><p>เมื่อเหรียญหมด 3 กอง หรือโบนัสหมด ให้เล่นต่อจนครบรอบ แล้วนับคะแนน ถ้าเท่ากัน ผู้มีแพะบนยอดมากกว่าชนะ ถ้ายังเท่ากันถือว่าชนะร่วม</p>'+
+  '<div class="ma"><button type="button" class="btn pri" data-a="mclose">เข้าใจแล้ว</button></div>';}
+function mSettings(){return'<h2>ตั้งค่า</h2>'+tog('sound','เสียงประกอบ')+tog('motion','ลดการเคลื่อนไหว')+tog('hints','ปุ่ม “แนะนำ” ระหว่างเล่น')+tog('hand','หน้าส่งต่อเครื่อง (โหมดในเครื่องเดียว)')+
+  '<div class="fld" style="margin-top:10px"><span>ความเร็วบอท</span><div class="row">'+[['slow','ช้า'],['normal','ปกติ'],['fast','เร็ว']].map(x=>'<button type="button" class="chip '+(CFG.speed===x[0]?'on':'')+'" data-a="speed" data-v="'+x[0]+'">'+x[1]+'</button>').join('')+'</div></div>'+
+  (LS?'':'<p class="mut">หน้าต่างนี้ไม่อนุญาตให้บันทึกข้อมูล การตั้งค่าและเกมที่ค้างไว้จะหายเมื่อปิดหน้า</p>')+
+  '<details class="adv"><summary>การเชื่อมต่อออนไลน์ (ขั้นสูง)</summary>'+tog('stun','ใช้เซิร์ฟเวอร์ STUN สาธารณะ')+'<div class="fld" style="margin-top:8px"><span>เวลารอการเชื่อมต่อ</span><div class="row">'+[15,30,60].map(t=>'<button type="button" class="chip '+(CFG.timeout===t?'on':'')+'" data-a="tmo" data-v="'+t+'">'+t+' วินาที</button>').join('')+'</div></div></details>'+
+  '<details class="adv" '+(G.testOut?'open':'')+'><summary>สำหรับนักพัฒนา</summary><button type="button" class="btn sm" data-a="tests" style="margin-top:6px">รันชุดทดสอบกติกา</button>'+(G.testOut?'<div class="tout">'+G.testOut+'</div>':'')+'</details>'+
+  '<div class="ma"><button type="button" class="btn dng sm" data-a="resetStats">ล้างสถิติ</button><button type="button" class="btn pri" data-a="mclose">เสร็จสิ้น</button></div>';}
+function mPause(){const on=isNet();return'<h2>พักเกม</h2><p class="mut">'+(on?'เกมออนไลน์ไม่หยุดสำหรับผู้เล่นคนอื่น':'เกมหยุดชั่วคราว'+(LS?' ความคืบหน้าถูกบันทึกอัตโนมัติ':''))+'</p><div class="ma st">'+
+  '<button type="button" class="btn pri" data-a="mclose">เล่นต่อ</button><button type="button" class="btn" data-a="log">บันทึกการเล่น</button><button type="button" class="btn" data-a="rules">กติกา</button><button type="button" class="btn" data-a="tut">วิธีเล่น</button><button type="button" class="btn" data-a="settings">ตั้งค่า</button>'+
+  (G.mode==='host'?'<button type="button" class="btn" data-a="seats">จัดการการเชื่อมต่อผู้เล่น</button>':'')+(G.mode==='guest'?'<button type="button" class="btn" data-a="rejoin">เชื่อมต่อกับโฮสต์ใหม่</button>':'')+
+  (G.mode!=='guest'?'<button type="button" class="btn dng" data-a="restart">เริ่มเกมใหม่'+(G.mode==='host'?' (ทุกคน)':'')+'</button>':'')+'<button type="button" class="btn dng" data-a="quit">'+(on?'ออกจากห้องไปเมนูหลัก':'ออกไปเมนูหลัก')+'</button></div>';}
+function mEnd(){const s=G.s,r=E.result(s),W=r.win,me=G.mode!=='local'&&W.indexOf(G.me)>=0;const rk=x=>1+r.rows.filter(y=>y.total>x.total||(y.total===x.total&&y.sm>x.sm)).length;
+  return'<div class="eh">'+W.map(i=>goat(s.players[i].color)).join('')+'<h2 class="et">'+(W.length>1?(me?'เสมอ — คุณชนะร่วม!':'เสมอ! ชนะร่วมกัน'):me?'คุณชนะ!':esc(s.players[W[0]].name)+' ชนะ!')+'</h2><p class="mut">'+esc(W.map(i=>s.players[i].name).join(', '))+' · '+r.rows[0].total+' คะแนน</p></div>'+
+  '<div class="tw"><table class="tb"><tr><th>อันดับ</th><th class="l">ผู้เล่น</th>'+MT.map(m=>'<th>'+coin(m,'xs')+'</th>').join('')+'<th>เหรียญ</th><th>โบนัส</th><th>ยอดเขา</th><th>รวม</th></tr>'+
+  r.rows.map(x=>'<tr class="'+(W.indexOf(x.i)>=0?'win':'')+'"><td>'+rk(x)+'</td><td class="l">'+goat(x.color)+' '+esc(x.name)+'</td>'+MT.map(m=>'<td>'+x.tokens[m]+'</td>').join('')+'<td>'+x.tp+'</td><td>'+(x.bonus.join('+')||0)+'</td><td>'+x.sm+'</td><td><b>'+x.total+'</b></td></tr>').join('')+'</table></div>'+
+  '<div class="ma"><button type="button" class="btn" data-a="mclose">ดูกระดาน</button><button type="button" class="btn" data-a="quit">เมนูหลัก</button>'+(G.mode==='guest'?'<button type="button" class="btn" disabled>รอโฮสต์เริ่มใหม่</button>':'<button type="button" class="btn pri" data-a="rematch">แข่งอีกครั้ง</button>')+'</div>';}
+function mHand(){const p=G.s.players[G.s.cur];return'<div class="eh"><p class="mut">ส่งเครื่องให้ผู้เล่นคนถัดไป</p><h2>ตาของ '+esc(p.name)+'</h2><div style="margin:12px 0">'+goat(p.color)+'</div><button type="button" class="btn pri big wide" data-a="mclose">พร้อมแล้ว — เริ่มตาของฉัน</button></div>';}
+function mConfirm(){const m=G.modal;return'<h2>'+esc(m.title)+'</h2><p>'+esc(m.msg)+'</p><div class="ma"><button type="button" class="btn soft" data-a="mclose">ยกเลิก</button><button type="button" class="btn pri" data-a="mok">'+esc(m.ok||'ยืนยัน')+'</button></div>';}
+function mSeats(){return'<h2>จัดการการเชื่อมต่อ</h2><p class="mut">ผู้เล่นหลุด? สร้างคำเชิญใหม่ให้ที่นั่งนั้น ผู้เล่นจะกลับมาที่นั่งเดิมพร้อมสถานะล่าสุด หรือให้บอทเล่นแทน</p>'+seatsHTML()+'<div class="ma"><button type="button" class="btn pri" data-a="mclose">ปิด</button></div>';}
+function mRejoin(){const f=G.form;return'<h2>เชื่อมต่อกับโฮสต์ใหม่</h2><ol class="mut"><li>ขอรหัสเชิญใหม่จากโฮสต์ (โฮสต์กด “สร้างคำเชิญใหม่” ที่ที่นั่งของคุณ)</li><li>วางด้านล่าง แล้วกด “สร้างรหัสตอบกลับ”</li><li>ส่งรหัสตอบกลับให้โฮสต์</li></ol>'+
+  '<textarea class="code" id="f-rj" data-k="rj" rows="3" placeholder="MG1.…">'+esc(f.rj)+'</textarea><button type="button" class="btn pri wide" style="margin-top:8px" data-a="rejoinGo">สร้างรหัสตอบกลับ</button>'+(f.rjerr?'<p class="err">'+esc(f.rjerr)+'</p>':'')+
+  (f.rjout?'<textarea class="code" id="rjOut" rows="3" readonly style="margin-top:8px">'+esc(f.rjout)+'</textarea><button type="button" class="btn sm" data-a="copy" data-v="rjOut">คัดลอกรหัสตอบกลับ</button>':'')+
+  '<p>สถานะ: '+pill(gStatus())+'</p><div class="ma"><button type="button" class="btn" data-a="mclose">ปิด</button></div>';}
+function mLog(){return'<h2>บันทึกการเล่น</h2><ol class="log">'+(G.s?logH():'')+'</ol><div class="ma"><button type="button" class="btn pri" data-a="mclose">ปิด</button></div>';}
+function mSugg(){return'<h2>ตัวเลือกแนะนำ</h2><p class="mut">ประเมินแบบบอทระดับยาก เลือกแล้วยังแก้ไขได้ก่อนยืนยัน</p><div class="sg">'+(G.sugg&&G.sugg.length?G.sugg.map((o,k)=>'<button type="button" class="sgb" data-a="pick" data-v="'+k+'"><b>'+(k+1)+'. '+(o.ms.length?'ภูเขา '+o.ms.join(', '):'ผ่านตา')+(o.gain>0?' · +'+o.gain+' คะแนน':'')+'</b><small>'+esc(describe(o.ev)||'—')+'</small></button>').join(''):'<p class="mut">ไม่มีตัวเลือกแนะนำ</p>')+'</div><div class="ma"><button type="button" class="btn" data-a="mclose">ปิด</button></div>';}
+function openModal(m){if(G.mode!=='host'||m.type==='tut'){clearTimeout(G.timers.bot);G.botTok++;}if(G.modal&&m.type==='confirm')m.back=G.modal;G.modal=m;render();
+  setTimeout(()=>{const b=document.querySelector('#modal button:not([disabled])');if(b)try{b.focus({preventScroll:true});}catch(e){}},30);}
+function closeModal(){const m=G.modal;if(!m)return;G.modal=m.type==='confirm'&&m.back?m.back:null;if(m.type==='tut'){CFG.tut=true;saveCfg();}if(m.type==='hand')G.hand=false;render();if(!G.modal&&G.s&&!G.s.over)sched();}
+function confirmM(title,msg,ok,cb){openModal({type:'confirm',title,msg,ok,cb});}
+function renderModal(){const md=$('#modal'),m=G.modal;if(!m){md.hidden=true;md.innerHTML='';return;}
+  const fn={confirm:mConfirm,rules:mRules,tut:mTut,settings:mSettings,pause:mPause,end:mEnd,hand:mHand,seats:mSeats,rejoin:mRejoin,log:mLog,sugg:mSugg}[m.type];
+  md.innerHTML='<div class="mc'+(m.type==='rules'||m.type==='end'?' w':'')+'" role="dialog" aria-modal="true">'+fn()+'</div>';md.hidden=false;}
+let lastModal=null;
+function render(){const a=document.activeElement,id=a&&a.id,ss=a&&typeof a.selectionStart==='number'?a.selectionStart:null;
+  const ps=document.querySelector('.players'),psl=ps?ps.scrollLeft:0,mcEl=document.querySelector('#modal .mc'),msl=mcEl?mcEl.scrollTop:0,prevM=lastModal;
+  const v={menu:vMenu,bots:vBots,local:vLocal,online:vOnline,game:vGame}[G.screen];$('#app').innerHTML=(G.screen==='game'&&!G.s)?'':v();renderModal();lastModal=G.modal;
+  const ps2=document.querySelector('.players');
+  if(ps2){ps2.scrollLeft=psl;const key=G.s?G.s.id+':'+G.s.cur:'';if(key!==G.lastCur){G.lastCur=key;const c=ps2.querySelector('.pc.act');if(c)ps2.scrollLeft=Math.max(0,c.offsetLeft-(ps2.clientWidth-c.offsetWidth)/2);}}
+  if(G.modal&&G.modal===prevM){const mc2=document.querySelector('#modal .mc');if(mc2)mc2.scrollTop=msl;}
+  if(id){const n=document.getElementById(id);if(n&&!n.disabled){try{n.focus({preventScroll:true});if(ss!==null&&n.setSelectionRange&&!n.readOnly)n.setSelectionRange(ss,ss);}catch(e){}}}}
+function applyCfg(){document.body.classList.toggle('rm',!!CFG.motion);}
+function leaveGame(){stopTimers();if(isNet())teardown(true);G.mode=null;G.s=null;G.modal=null;G.hand=false;G.pending=false;G.screen='menu';render();}
+
+/* ===== TESTS ===== */
+function seeded(seed){let a=seed>>>0;return n=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return Math.floor((((t^(t>>>14))>>>0)/4294967296)*n);};}
+function runTests(){const out=[],T=(n,c)=>out.push([n,!!c]);const P=n=>Array.from({length:n},(_,i)=>({name:'P'+i,kind:'human'}));
+  const at=(dice,mod)=>{const s=E.create(P(2),0);s.phase='assign';s.dice=dice;if(mod)mod(s);return s;};const cm=(s,f,g)=>E.apply(s,{type:'commit',faces:f,groups:g},s.cur);
+  try{T('2 คน: เหรียญลดกองละ 2',MT.every(m=>E.create(P(2),0).supply[m]===TK[m]-2));T('3 คน: เหรียญลดกองละ 1',MT.every(m=>E.create(P(3),0).supply[m]===TK[m]-1));
+    T('4 คน: เหรียญเต็มกองตามต้นฉบับ',MT.every(m=>E.create(P(4),0).supply[m]===TK[m]));T('2–4 คน: โบนัส 15·12·9·6',[2,3,4].every(n=>BONL(n).join()==='15,12,9,6'));
+    T('5–8 คน: เหรียญเพิ่มขึ้นตามจำนวนผู้เล่น',[5,6,7,8].every(n=>MT.every(m=>TOK(n)[m]>TOK(n-1)[m]||TOK(n)[m]>=TOK(n-1)[m]))&&TOK(8)[5]===18&&TOK(8)[10]===9);
+    T('8 คน: โบนัส 8 แผ่น 15→6',BONL(8).length===8&&BONL(8)[0]===15&&BONL(8)[7]===6);
+    T('2–8 คน: สถานะเริ่มต้นผ่านการตรวจ',[2,3,4,5,6,7,8].every(n=>E.valid(E.create(P(n),0))));
+    const s0=E.create(P(2),0),rl=E.apply(s0,{type:'roll'},0,seeded(1));T('ทอยได้ 4 ลูก ค่า 1–6',!rl.e&&rl.s.dice.length===4&&rl.s.dice.every(d=>d>=1&&d<=6));
+    T('ทอยซ้ำไม่ได้',!!E.apply(rl.s,{type:'roll'},0).e);T('ไม่ถึงตาถูกปฏิเสธ',!!E.apply(s0,{type:'roll'},1).e);
+    T('เปลี่ยนหน้า 1 ที่เกินได้',E.checkFaces([1,1,3,4],[1,6,3,4])===null);T('ต้องเหลือหน้า 1',E.checkFaces([1,1,3,4],[6,6,3,4])!==null);T('หน้า 1 ลูกเดียวเปลี่ยนไม่ได้',E.checkFaces([1,2,3,4],[6,2,3,4])!==null);
+    T('ผลรวม 11 ใช้ไม่ได้',!!E.checkGroups([[2,3]],[1,1,5,6]).e);T('ลูกเดียวสองกลุ่มไม่ได้',!!E.checkGroups([[0,1],[1,2]],[3,4,3,2]).e);
+    let r=cm(at([3,4,1,6]),[3,4,1,6],[[0,1],[2,3]]);T('สองกลุ่มรวม 7 → ขึ้น 2 ช่อง',!r.e&&r.s.players[0].goats[7]===2&&r.s.cur===1);
+    r=cm(at([5,5,2,2],s=>{s.players[0].goats[10]=1;s.players[1].goats[10]=2;}),[5,5,2,2],[[0,1]]);T('ถึงยอดได้เหรียญ + ไล่คู่แข่ง',!r.e&&r.s.players[0].tokens[10]===1&&r.s.players[1].goats[10]===0);
+    r=cm(at([4,5,3,6],s=>{s.players[0].goats[9]=2;}),[4,5,3,6],[[0,1],[2,3]]);T('อยู่บนยอดแล้วได้เหรียญทุกกลุ่ม',!r.e&&r.s.players[0].tokens[9]===2);
+    r=cm(at([4,5,3,6],s=>{s.players[0].goats[9]=2;s.players[1].tokens[9]=s.supply[9];s.supply[9]=0;}),[4,5,3,6],[[0,1],[2,3]]);T('กองหมดแล้วไม่ได้เหรียญเพิ่ม',!r.e&&r.s.players[0].tokens[9]===0);
+    r=cm(at([5,5,1,1],s=>{MT.forEach(m=>{if(m!==10){s.players[0].tokens[m]=1;s.supply[m]--;}});s.players[0].goats[10]=2;}),[5,5,1,1],[[0,1]]);T('ครบ 6 ภูเขาได้โบนัส 15',!r.e&&r.s.players[0].bonus[0]===15);
+    r=cm(at([3,4,2,2],s=>{s.players[1].tokens[5]=s.supply[5];s.supply[5]=0;s.players[1].tokens[6]=s.supply[6];s.supply[6]=0;s.players[1].tokens[7]=s.supply[7]-1;s.supply[7]=1;s.players[0].goats[7]=3;}),[3,4,2,2],[[0,1]]);
+    T('เหรียญหมด 3 กอง → รอบสุดท้าย',!r.e&&r.s.endTrig&&!r.s.over);let r2=E.apply(r.s,{type:'roll'},1,seeded(3));r2=E.apply(r2.s,{type:'commit',faces:r2.s.dice.slice(),groups:[]},1);T('จบเมื่อครบรอบ',!r2.e&&r2.s.over);
+    T('สถานะผ่านการตรวจสอบ',E.valid(r2.s));const bad=clone(r2.s);bad.supply[5]++;T('ตรวจจับเหรียญผิดปกติ',!E.valid(bad));
+    const tb=E.create(P(2),0);tb.players[0].tokens[5]=2;tb.supply[5]-=2;tb.players[1].tokens[10]=1;tb.supply[10]--;tb.players[1].goats[10]=2;T('คะแนนเท่ากัน ตัดสินด้วยแพะบนยอด',E.result(tb).win.join()==='1');
+    let legal=true;const rg=seeded(42);for(let k=0;k<100;k++){const d=[0,0,0,0].map(()=>1+rg(6));E.options(d).forEach(o=>{if(E.checkFaces(d,o.faces)||E.checkGroups(o.groups,o.faces).e)legal=false;});}T('ตัวเลือกที่ระบบสร้างถูกกติกาทั้งหมด',legal);
+    let rej=false;try{dec('MG1.@@@');}catch(e){rej=true;}T('รหัสเชิญเสียหายถูกปฏิเสธ',rej);
+    [[['hard','hard','hard','hard'],7],[['easy','normal'],11],[['normal','hard','easy'],23],[['normal','hard','easy','normal','hard','easy'],29],[['normal','normal','easy','hard','normal','easy','hard','normal'],31]].forEach(c=>{const rg2=seeded(c[1]),R=()=>rg2(1e9)/1e9;let s=E.create(c[0].map((d,i)=>({name:'B'+i,kind:'bot',diff:d})),0),n=0,ok=true;
+      while(!s.over&&n<6000){const x=s.phase==='roll'?E.apply(s,{type:'roll'},s.cur,rg2):E.apply(s,AI.choose(s,s.players[s.cur].diff,R).action,s.cur);if(x.e||!E.valid(x.s)){ok=false;break;}s=x.s;n++;}
+      T('จำลองเกม '+c[0].length+' บอทจนจบ ('+n+' ขั้น)',ok&&s.over);});
+  }catch(e){T('ข้อผิดพลาด: '+e.message,false);}return out;}
+window.MG_TESTS=()=>{const r=runTests();console.table(r);return r;};
+
+/* ===== ACTIONS (event delegation) ===== */
+const A={
+  go:v=>{G.screen=v;G.form.jerr='';render();},
+  form:v=>{const i=v.indexOf(':');G.form[v.slice(0,i)]=v.slice(i+1);render();},
+  cfg:v=>{CFG[v]=!CFG[v];saveCfg();applyCfg();render();if(v==='sound'&&CFG.sound)snd('click');},
+  speed:v=>{CFG.speed=v;saveCfg();render();},tmo:v=>{CFG.timeout=+v;saveCfg();render();},
+  tut:()=>openModal({type:'tut',i:0}),tutN:()=>{if(G.modal.i<TUT.length-1){G.modal.i++;render();}else closeModal();},tutP:()=>{if(G.modal.i>0){G.modal.i--;render();}},
+  rules:()=>openModal({type:'rules'}),settings:()=>openModal({type:'settings'}),pause:()=>openModal({type:'pause'}),seats:()=>openModal({type:'seats'}),log:()=>openModal({type:'log'}),
+  rejoin:()=>{G.form.rj='';G.form.rjout='';G.form.rjerr='';openModal({type:'rejoin'});},rejoinGo:()=>rejoinGo(),
+  mclose:()=>closeModal(),
+  mok:()=>{const m=G.modal,cb=m&&m.cb;G.modal=m&&m.back?m.back:null;render();if(cb)cb();if(!G.modal&&G.s&&!G.s.over)sched();},
+  startBots:()=>{const f=G.form,ci=+f.color,others=COL.map((_,i)=>i).filter(c=>c!==ci),n=Math.min(MAXP-1,Math.max(1,+f.bots));CFG.name=String(f.name||'').trim().slice(0,16);saveCfg();
+    const ps=[{name:cleanName(f.name,'คุณ'),color:COL[ci],kind:'human'}];for(let i=0;i<n;i++)ps.push({name:BOTN[i],color:COL[others[i]],kind:'bot',diff:f.diff});
+    G.gameCfg={ps,first:f.first};begin('bots',ps,f.first==='me'?0:rnd(ps.length));},
+  startLocal:()=>{const n=Math.min(MAXP,Math.max(2,+G.form.lc)),ps=[];for(let i=0;i<n;i++)ps.push({name:cleanName(G.form['ln'+i],'ผู้เล่น '+(i+1)),color:COL[i],kind:'human'});G.gameCfg={ps};begin('local',ps,0);},
+  resume:()=>{const sv=load('game',null);if(!sv||!E.valid(sv.s)||sv.s.over||(sv.mode!=='bots'&&sv.mode!=='local')){save('game',null);toast('ไม่พบเกมที่บันทึกไว้','warn');return render();}
+    G.gameCfg={ps:sv.s.players.map(p=>({name:p.name,color:p.color,kind:p.kind,diff:p.diff})),first:'random'};begin(sv.mode,null,0,sv.s);},
+  roll:()=>{if(canAct()&&G.s.phase==='roll')act({type:'roll'},actor());},
+  die:v=>{if(!canAct()||G.s.phase!=='assign')return;const i=+v,gi=G.g.findIndex(g=>g.indexOf(i)>=0);if(gi>=0)G.g.splice(gi,1);else if(G.sel.indexOf(i)>=0)G.sel.splice(G.sel.indexOf(i),1);else G.sel.push(i);snd('click');render();},
+  group:()=>{if(!canAct()||!G.sel.length)return;const t=selSum();if(t<5||t>10){toast('ผลรวม '+t+' ใช้ไม่ได้ — ต้องได้ 5 ถึง 10','warn');return;}G.g.push(G.sel.slice().sort((a,b)=>a-b));G.sel=[];snd('click');render();},
+  ungroup:v=>{if(!canAct())return;G.g.splice(+v,1);render();},
+  clear:()=>{if(!canAct())return;G.f=G.s.dice.slice();G.g=[];G.sel=[];G.wild=-1;render();},
+  wild:v=>{if(!canAct())return;G.wild=(+v===G.wild)?-1:+v;render();},
+  face:v=>{const i=G.wild;if(!canAct()||i<0||!canWild(i)||!allowFace(i,+v))return;G.f[i]=+v;const gi=G.g.findIndex(g=>g.indexOf(i)>=0);if(gi>=0)G.g.splice(gi,1);G.sel=G.sel.filter(x=>x!==i);G.wild=-1;snd('click');render();},
+  sugg:()=>{if(!canAct())return;const seen={},out=[];try{AI.rank(G.s,'hard').forEach(o=>{const k=o.ms.join(',');if(!seen[k]&&out.length<3){seen[k]=1;out.push(o);}});}catch(e){}G.sugg=out;openModal({type:'sugg'});},
+  pick:v=>{const o=G.sugg&&G.sugg[+v];G.modal=null;if(!o||!canAct()){render();return;}G.f=o.a.faces.slice();G.g=o.a.groups.map(x=>x.slice());G.sel=[];G.wild=-1;G.sugg=null;snd('click');render();},
+  commit:()=>{if(!canAct()||G.s.phase!=='assign')return;if(G.sel.length){toast('ลูกเต๋าที่เลือกยังไม่ได้รวมเป็นกลุ่ม — กด “รวมกลุ่ม” หรือแตะเพื่อยกเลิก','warn');return;}
+    const go=()=>{if(canAct()&&G.s.phase==='assign')act({type:'commit',faces:G.f.slice(),groups:G.g.map(x=>x.slice())},actor());};
+    if(!G.g.length&&G.any)confirmM('ผ่านตาโดยไม่เดิน?','ยังมีกลุ่มลูกเต๋าที่เดินได้อยู่ ต้องการผ่านตานี้จริงหรือไม่','ผ่านตา',go);else go();},
+  showEnd:()=>showEnd(),
+  restart:()=>confirmM('เริ่มเกมใหม่?',G.mode==='host'?'เกมของทุกคนจะถูกแทนที่ด้วยเกมใหม่':'ความคืบหน้าของเกมนี้จะหายไป','เริ่มใหม่',()=>A.rematch()),
+  rematch:()=>{G.modal=null;if(G.mode==='host'){const ps=G.s.players.map(p=>({name:p.name,color:p.color,kind:p.kind,diff:p.diff,seat:p.seat}));begin('host',ps,rnd(ps.length));hostBroadcast([]);toast('เริ่มเกมใหม่สำหรับทุกคนแล้ว','good');}
+    else if(G.gameCfg){const ps=G.gameCfg.ps;begin(G.mode,ps,G.mode==='bots'&&G.gameCfg.first==='me'?0:rnd(ps.length));}},
+  quit:()=>{if(!G.s||G.s.over){leaveGame();return;}confirmM('ออกไปเมนูหลัก?',isNet()?(G.mode==='host'?'ห้องจะถูกปิดและทุกคนจะถูกตัดการเชื่อมต่อ':'คุณจะออกจากห้องนี้'):(LS?'เกมถูกบันทึกไว้แล้ว เล่นต่อได้จากเมนูหลัก':'ความคืบหน้าจะหายไป'),'ออก',leaveGame);},
+  hostCreate:()=>hostCreate(),invite:v=>invite(v),accept:v=>accept(v),setBot:v=>setBot(v),hostStart:()=>hostStart(),join:()=>join(),
+  sdiff:v=>{const p=v.split(':'),st=NET.seats[+p[0]];if(st&&DIFF[p[1]]){st.diff=p[1];lobbyCast();render();}},
+  closeRoom:()=>confirmM('ปิดห้อง?','ผู้เล่นทุกคนจะถูกตัดการเชื่อมต่อ','ปิดห้อง',()=>{teardown(true);render();}),
+  leaveRoom:()=>{teardown(true);G.form.jerr='';render();},
+  leaveOnline:()=>{if(NET.role)confirmM('ออกจากหน้าออนไลน์?','การเชื่อมต่อทั้งหมดจะถูกปิด','ออก',()=>{teardown(true);G.screen='menu';render();});else{G.screen='menu';render();}},
+  copy:v=>{const t=document.getElementById(v);if(!t)return;const done=ok=>toast(ok?'คัดลอกแล้ว':'คัดลอกอัตโนมัติไม่ได้ — ข้อความถูกเลือกไว้แล้ว กดคัดลอกเอง',ok?'good':'warn');
+    const fb=()=>{t.focus();t.select();let ok=false;try{ok=document.execCommand('copy');}catch(e){}done(ok);};
+    try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(()=>done(true),fb);else fb();}catch(e){fb();}},
+  tests:()=>{G.testOut='กำลังทดสอบ… (การจำลองเกม 8 คนอาจใช้เวลาหลายวินาที)';render();setTimeout(()=>{const r=runTests(),f=r.filter(x=>!x[1]).length;
+    G.testOut='<p class="'+(f?'bad':'ok')+'"><b>'+(f?'ไม่ผ่าน '+f+' จาก '+r.length:'ผ่านทั้งหมด '+r.length+' รายการ')+'</b></p>'+r.map(x=>'<div class="'+(x[1]?'ok':'bad')+'">'+(x[1]?'ผ่าน · ':'ไม่ผ่าน · ')+esc(x[0])+'</div>').join('');render();},50);},
+  resetStats:()=>confirmM('ล้างสถิติ?','สถิติการเล่นทั้งหมดจะถูกลบ','ล้างสถิติ',()=>{STATS.played=0;STATS.wins=0;STATS.best=0;save('stats',STATS);toast('ล้างสถิติแล้ว','good');render();})
+};
+document.addEventListener('click',function(e){
+  if(e.target&&e.target.id==='modal'&&G.modal&&G.modal.type!=='confirm'&&G.modal.type!=='hand'){closeModal();return;}
+  const b=e.target&&e.target.closest?e.target.closest('[data-a]'):null;if(!b||b.disabled)return;const fn=A[b.getAttribute('data-a')];if(!fn)return;
+  e.preventDefault();try{const r=fn(b.getAttribute('data-v'));if(r&&r.catch)r.catch(err=>{console.error(err);toast('เกิดข้อผิดพลาด: '+err.message,'err');});}catch(err){console.error(err);toast('เกิดข้อผิดพลาด: '+err.message,'err');}});
+document.addEventListener('input',function(e){const k=e.target&&e.target.getAttribute&&e.target.getAttribute('data-k');if(k)G.form[k]=e.target.value;});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&G.modal){closeModal();return;}
+  if(G.screen!=='game'||G.modal||!G.s||e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target;if(t&&/INPUT|TEXTAREA|SELECT/.test(t.tagName))return;const k=(e.key||'').toLowerCase();
+  if(k==='r')A.roll();else if(k.length===1&&'1234'.indexOf(k)>=0&&G.s.phase==='assign')A.die(String(+k-1));else if(k==='g')A.group();else if(k==='c')A.commit();});
+window.addEventListener('beforeunload',function(){try{if(NET.role)teardown(true);}catch(e){}});
+
+/* ===== START ===== */
+try{applyCfg();render();BOOT.hidden=true;}catch(e){bootMsg('เริ่มเกมไม่สำเร็จ: '+e.message,true);}
+})();
+</script>
+</body>
+</html>
